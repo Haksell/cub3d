@@ -1,5 +1,5 @@
-NAME := minirt
-TEST := minitest
+NAME := cub3d
+TEST := test3d
 PATH_INCLUDES := includes
 PATH_SRCS := srcs
 PATH_OBJS := objs
@@ -21,21 +21,16 @@ GREEN := "\033[1;32m"
 RESET := "\033[0;0m"
 
 vpath %.c ${PATH_SRCS}/display
-SRCS += light ray render_frame scatter
-
-vpath %.c ${PATH_SRCS}/hit
-SRCS += hit_disk hit_plane hit_sphere hit_tube hit_world
+SRCS += render_frame
 
 vpath %.c ${PATH_SRCS}/mlx_tools
 SRCS += handle_key_down init_minilibx
 
 vpath %.c ${PATH_SRCS}/parsing
-SRCS += ft_atod get_words parse_elements
-SRCS += parse_objects parse_scene parse_vectors
+SRCS += get_words parse_scene parse_vectors
 
 vpath %.c ${PATH_SRCS}/utils
-SRCS += arrays clean complain init_pixels math random_double random_vector
-SRCS += print # TODO remove
+SRCS += arrays clean complain init_pixels
 
 vpath %.c ${PATH_SRCS}/vec3
 SRCS += vec3a vec3b vec3c

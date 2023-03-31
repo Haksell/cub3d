@@ -2,8 +2,6 @@
 
 void	free_data(t_data *data)
 {
-	ft_free_double((void ***)&data->pixels);
-	free(data->scene.world);
 	if (data->mlx.mlx != NULL)
 	{
 		if (data->mlx.img != NULL)

@@ -45,20 +45,3 @@ bool	parse_color(char *s, t_vec3 *color)
 		&& parse_component(s2, &color->y)
 		&& parse_component(s3, &color->z));
 }
-
-bool	parse_coord(char *s, t_vec3 *coord)
-{
-	char	*s2;
-	char	*s3;
-
-	return (get_commas(s, &s2, &s3)
-		&& ft_atod(s, &coord->x)
-		&& ft_atod(s2, &coord->y)
-		&& ft_atod(s3, &coord->z));
-}
-
-bool	parse_normalized_vector(char *s, t_vec3 *vector)
-{
-	return (parse_coord(s, vector)
-		&& is_close(vec3_length_squared(*vector), 1));
-}
