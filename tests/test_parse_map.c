@@ -30,7 +30,7 @@ static void	test(char *title, char *directory, bool expected)
 	display_title(title);
 	filenames = ls(directory);
 	if (!expected)
-		ft_lstadd_front(&filenames, ft_lstnew("maps/invalid/notfound.rt"));
+		ft_lstadd_front(&filenames, ft_lstnew("maps/invalid/notfound.cub"));
 	while (filenames != NULL)
 	{
 		ft_bzero(&map, sizeof(map));
@@ -44,7 +44,7 @@ static void	test(char *title, char *directory, bool expected)
 void	test_parse_map(void)
 {
 	test("VALID MAPS", VALID_DIRECTORY, true);
-	chmod("maps/invalid/unreadable.rt", 0000);
+	chmod("maps/invalid/unreadable.cub", 0000);
 	test("INVALID MAPS", INVALID_DIRECTORY, false);
-	chmod("maps/invalid/unreadable.rt", 0644);
+	chmod("maps/invalid/unreadable.cub", 0644);
 }
