@@ -88,4 +88,4 @@ norm_test: norm test
 
 .PHONY: all clean fclean norm norm_test re test
 
-.SILENT: norm ${MLX} ${PATH_MLX}
+.SILENT: norm norm_test test ${MLX} ${PATH_MLX}
