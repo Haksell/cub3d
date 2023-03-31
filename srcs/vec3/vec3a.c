@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "cub3d.h"
 
 t_vec3	vec3_negate(t_vec3 v)
 {

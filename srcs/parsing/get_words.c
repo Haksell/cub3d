@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "cub3d.h"
 
 static ssize_t	count_file_size(char *filename)
 {

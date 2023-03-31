@@ -10,7 +10,6 @@ LIBFT := ${PATH_LIBFT}/libft.a
 MLX := ${PATH_MLX}/libmlx.a
 GARBAGE := .vscode
 INCLUDES := -I./${PATH_INCLUDES} -I./${PATH_LIBFT}/includes -I./${PATH_MLX}
-HEADERS := error minirt struct
 CC := cc -Wall -Wextra -Werror -O3 -g3 # TODO remove -g3
 YEET1 := 1>/dev/null
 YEET2 := 2>/dev/null
@@ -27,7 +26,7 @@ vpath %.c ${PATH_SRCS}/mlx_tools
 SRCS += handle_key_down init_minilibx
 
 vpath %.c ${PATH_SRCS}/parsing
-SRCS += get_words parse_scene parse_vectors
+SRCS += get_words parse_map parse_vectors
 
 vpath %.c ${PATH_SRCS}/utils
 SRCS += arrays clean complain init_pixels
@@ -36,11 +35,11 @@ vpath %.c ${PATH_SRCS}/vec3
 SRCS += vec3a vec3b vec3c
 
 ifeq (test, ${findstring test, ${MAKECMDGOALS}})
-	HEADERS += minitest
+	HEADERS += test3d
 	vpath %.c ${PATH_TESTS}
-	SRCS += minitest test_atod_range test_parse_color
-	SRCS += test_parse_coord test_parse_scene
+	SRCS += test3d test_parse_map
 else
+	HEADERS += error minirt struct
 	vpath %.c ${PATH_SRCS}
 	SRCS += main
 endif

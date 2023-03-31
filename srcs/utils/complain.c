@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "cub3d.h"
 
 static void	complain(char *error_message)
 {

@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "cub3d.h"
 
 int	main(int argc, char **argv)
 {
@@ -6,7 +6,7 @@ int	main(int argc, char **argv)
 
 	ft_bzero(&data, sizeof(data));
 	if (!init_pixels(&data)
-		|| !parse_scene(&data.scene, argc, argv)
+		|| !parse_map(&data.map, argc, argv)
 		|| !init_minilibx(&data.mlx, argv[1]))
 		return (free_data(&data), EXIT_FAILURE);
 	mlx_hook(data.mlx.win, DestroyNotify, NoEventMask, close_window, &data);

@@ -1,4 +1,4 @@
-#include "minitest.h"
+#include "test3d.h"
 
 static int	definitely_not_a_global(bool update)
 {
@@ -35,9 +35,6 @@ void	ft_assert(char *test_name, bool result)
 
 int	main(void)
 {
-	test_atod_range();
-	test_parse_color();
-	test_parse_coord();
-	test_parse_scene();
+	test_parse_map();
 	return (definitely_not_a_global(false));
 }

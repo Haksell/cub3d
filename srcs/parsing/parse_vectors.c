@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "cub3d.h"
 
 static bool	get_commas(char *s, char **s2, char **s3)
 {

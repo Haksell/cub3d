@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "cub3d.h"
 
 static int	get_int_component(double x)
 {

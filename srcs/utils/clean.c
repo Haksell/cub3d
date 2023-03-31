@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "cub3d.h"
 
 void	free_data(t_data *data)
 {

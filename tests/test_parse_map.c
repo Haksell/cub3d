@@ -1,10 +1,10 @@
-#include "minitest.h"
+#include "test3d.h"
 
 static t_list	*ls(char *path)
 {
 	DIR				*dp;
-	struct dirent	*ep;
 	t_list			*lst;
+	struct dirent	*ep;
 
 	lst = NULL;
 	dp = opendir(path);
@@ -22,7 +22,7 @@ static t_list	*ls(char *path)
 
 static void	test(char *title, char *directory, bool expected)
 {
-	t_scene	scene;
+	t_map	map;
 	char	*filename;
 	t_list	*filenames;
 	bool	result;
@@ -30,21 +30,21 @@ static void	test(char *title, char *directory, bool expected)
 	display_title(title);
 	filenames = ls(directory);
 	if (!expected)
-		ft_lstadd_front(&filenames, ft_lstnew("scenes/invalid/notfound.rt"));
+		ft_lstadd_front(&filenames, ft_lstnew("maps/invalid/notfound.rt"));
 	while (filenames != NULL)
 	{
-		ft_bzero(&scene, sizeof(scene));
+		ft_bzero(&map, sizeof(map));
 		filename = filenames->content;
-		result = parse_scene(&scene, 2, (char *[]){"", filename, NULL});
+		result = parse_map(&map, 2, (char *[]){"", filename, NULL});
 		ft_assert(filename, result == expected);
 		filenames = filenames->next;
 	}
 }
 
-void	test_parse_scene(void)
+void	test_parse_map(void)
 {
-	test("VALID SCENES", VALID_DIRECTORY, true);
-	chmod("scenes/invalid/unreadable.rt", 0000);
-	test("INVALID SCENES", INVALID_DIRECTORY, false);
-	chmod("scenes/invalid/unreadable.rt", 0644);
+	test("VALID MAPS", VALID_DIRECTORY, true);
+	chmod("maps/invalid/unreadable.rt", 0000);
+	test("INVALID MAPS", INVALID_DIRECTORY, false);
+	chmod("maps/invalid/unreadable.rt", 0644);
 }

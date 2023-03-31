@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "cub3d.h"
 
 double	vec3_length_squared(t_vec3 v)
 {

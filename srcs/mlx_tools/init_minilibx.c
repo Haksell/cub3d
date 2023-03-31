@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "cub3d.h"
 
 bool	init_minilibx(t_mlx *mlx, char *window_title)
 {

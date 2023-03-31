@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "cub3d.h"
 
 int	handle_key_down(int keycode, t_data *data)
 {
