@@ -5,13 +5,13 @@
 # include "mlx.h"
 
 # include <fcntl.h>
-# include <limits.h>
+// # include <limits.h>
 # include <math.h>
-# include <stdbool.h>
-# include <stdlib.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <unistd.h>
+// # include <stdbool.h>
+// # include <stdlib.h>
+// # include <sys/stat.h>
+// # include <sys/types.h>
+// # include <unistd.h>
 # include <X11/keysym.h>
 # include <X11/Xlib.h>
 
@@ -44,7 +44,6 @@
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 360
 # define MAX_DEPTH 25
-# define BUFFER_SIZE_RT 16384
 # define SHADOW_ACNE_FIX 1e-3
 # define SPACES " \f\n\r\t\v"
 
@@ -106,7 +105,6 @@ bool		init_minilibx(t_mlx *mlx, char *window_title);
 /*                                                                            */
 /******************************************************************************/
 
-char		***get_words(char *filename);
 bool		parse_map(t_map *map, int argc, char **argv);
 
 /******************************************************************************/
@@ -116,7 +114,6 @@ bool		parse_map(t_map *map, int argc, char **argv);
 /******************************************************************************/
 
 int			arrlen(char **lines);
-int			clamp(int x, int min, int max);
 int			close_window(t_data *data);
 bool		complain_bool(char *error_message);
 int			complain_int(char *error_message);
@@ -136,7 +133,6 @@ double		vec3_dot(t_vec3 v1, t_vec3 v2);
 double		vec3_length(t_vec3 v);
 double		vec3_length_squared(t_vec3 v);
 t_vec3		vec3_mul(t_vec3 v1, t_vec3 v2);
-bool		vec3_near_zero(t_vec3 v);
 t_vec3		vec3_negate(t_vec3 v);
 t_vec3		vec3_scale(t_vec3 v, double t);
 t_vec3		vec3_sub(t_vec3 v1, t_vec3 v2);

@@ -2,7 +2,7 @@
 
 static int	get_int_component(double x)
 {
-	return ((int)(255.9999 * sqrt(x)));
+	return ((int)(255.9999 * x));
 }
 
 static void	pixel_put(t_mlx *mlx, int x, int y, t_vec3 color)
