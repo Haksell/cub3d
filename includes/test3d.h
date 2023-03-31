@@ -1,5 +1,5 @@
-#ifndef MINITEST_H
-# define MINITEST_H
+#ifndef TEST3D_H
+# define TEST3D_H
 
 # include "cub3d.h"
 

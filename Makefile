@@ -35,11 +35,11 @@ vpath %.c ${PATH_SRCS}/vec3
 SRCS += vec3a vec3b vec3c
 
 ifeq (test, ${findstring test, ${MAKECMDGOALS}})
-	HEADERS += test3d
+	HEADERS := test3d
 	vpath %.c ${PATH_TESTS}
 	SRCS += test3d test_parse_map
 else
-	HEADERS += error minirt struct
+	HEADERS := cub3d
 	vpath %.c ${PATH_SRCS}
 	SRCS += main
 endif

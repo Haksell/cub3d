@@ -1,5 +1,5 @@
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "libft.h"
 # include "mlx.h"
@@ -15,7 +15,7 @@
 # include <X11/keysym.h>
 # include <X11/Xlib.h>
 
-# define USAGE_MANDATORY "Usage: ./minirt *.rt"
+# define USAGE_MANDATORY "Usage: ./cub3d *.cub"
 # define SPACY_LINE "Line contains only spaces and tabulations"
 # define OPEN_ERROR "File cannot be opened"
 # define MALLOC_ERROR "Impossible to allocate heap memory"
