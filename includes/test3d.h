@@ -17,6 +17,6 @@
 
 void	display_title(char *s);
 void	ft_assert(char *test_name, bool result);
-void	test_parse_map(void);
+void	test_parse_file(void);
 
 #endif

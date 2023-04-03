@@ -26,7 +26,7 @@ vpath %.c ${PATH_SRCS}/mlx_tools
 SRCS += handle_key_down init_minilibx
 
 vpath %.c ${PATH_SRCS}/parsing
-SRCS += parse_map parse_vectors
+SRCS += get_lines parse_file parse_color
 
 vpath %.c ${PATH_SRCS}/utils
 SRCS += arrays clean complain init_pixels
@@ -37,7 +37,7 @@ SRCS += vec3a vec3b vec3c
 ifeq (test, ${findstring test, ${MAKECMDGOALS}})
 	HEADERS := test3d
 	vpath %.c ${PATH_TESTS}
-	SRCS += test3d test_parse_map
+	SRCS += test3d test_parse_file
 else
 	HEADERS := cub3d
 	vpath %.c ${PATH_SRCS}

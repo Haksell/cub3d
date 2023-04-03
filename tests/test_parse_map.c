@@ -22,7 +22,7 @@ static t_list	*ls(char *path)
 
 static void	test(char *title, char *directory, bool expected)
 {
-	t_map	map;
+	t_map	data;
 	char	*filename;
 	t_list	*filenames;
 	bool	result;
@@ -33,15 +33,15 @@ static void	test(char *title, char *directory, bool expected)
 		ft_lstadd_front(&filenames, ft_lstnew("maps/invalid/notfound.cub"));
 	while (filenames != NULL)
 	{
-		ft_bzero(&map, sizeof(map));
+		ft_bzero(&data, sizeof(data));
 		filename = filenames->content;
-		result = parse_map(&map, 2, (char *[]){"", filename, NULL});
+		result = parse_file(&data, 2, (char *[]){"", filename, NULL});
 		ft_assert(filename, result == expected);
 		filenames = filenames->next;
 	}
 }
 
-void	test_parse_map(void)
+void	test_parse_file(void)
 {
 	test("VALID MAPS", VALID_DIRECTORY, true);
 	chmod("maps/invalid/unreadable.cub", 0000);

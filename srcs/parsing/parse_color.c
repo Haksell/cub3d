@@ -15,7 +15,7 @@ static bool	get_commas(char *s, char **s2, char **s3)
 	return (true);
 }
 
-static bool	parse_component(char *s, double *x)
+static bool	parse_component(char *s, int *x)
 {
 	int	n;
 	int	i;
@@ -35,13 +35,19 @@ static bool	parse_component(char *s, double *x)
 	return (s[i] == '\0');
 }
 
-bool	parse_color(char *s, t_vec3 *color)
+bool	parse_color(char *s, int *color)
 {
+	int		r;
+	int		g;
+	int		b;
 	char	*s2;
 	char	*s3;
 
-	return (get_commas(s, &s2, &s3)
-		&& parse_component(s, &color->x)
-		&& parse_component(s2, &color->y)
-		&& parse_component(s3, &color->z));
+	if (!get_commas(s, &s2, &s3)
+		|| !parse_component(s, &r)
+		|| !parse_component(s2, &g)
+		|| !parse_component(s3, &b))
+		return (false);
+	*color = r << 16 | g << 8 | b;
+	return (true);
 }

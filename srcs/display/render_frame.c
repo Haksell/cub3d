@@ -32,7 +32,7 @@ int	render_frame(t_data *data)
 		++y;
 	}
 	++data->frame;
-	ft_printf("data->frame=%d\n", data->frame);
+	printf("data->frame=%d\n", data->frame);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 	return (EXIT_SUCCESS);
 }

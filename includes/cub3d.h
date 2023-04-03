@@ -14,31 +14,32 @@
 # include <X11/keysym.h>
 # include <X11/Xlib.h>
 
+# include <stdio.h> // TODO remove
+
+# define BUFFER_SIZE_3D 16384
+
 # define USAGE_MANDATORY "Usage: ./cub3d *.cub"
 # define SPACY_LINE "Line contains only spaces and tabulations"
 # define OPEN_ERROR "File cannot be opened"
 # define MALLOC_ERROR "Impossible to allocate heap memory"
 # define READ_ERROR "Error while reading the file"
-# define INVALID_IDENTIFIER "Invalid identifier"
-
-# define DOUBLE_AMBIENT "Too many ambient lights"
-# define DOUBLE_CAMERA "Too many cameras"
-# define DOUBLE_LIGHT "Too many lights"
-# define ERROR_AMBIENT "Error parsing ambient light"
-# define ERROR_CAMERA "Error parsing camera"
-# define ERROR_LIGHT "Error parsing light"
-# define NO_CAMERA "There is no camera"
-# define NO_LIGHT "There is no light"
-# define FOV_ERROR "Field of view is invalid"
 
 # define ERROR_CYLINDER "Error parsing cylinder"
 # define ERROR_PLANE "Error parsing plane"
 # define ERROR_SPHERE "Error parsing sphere"
 
-# define ERROR_MLX "Failed to initialize mlx"
-# define ERROR_WINDOW "Failed to initialize window"
-# define ERROR_IMAGE "Failed to initialize image"
 # define ERROR_ADDR "Failed to initialize addr"
+# define ERROR_IMAGE "Failed to initialize image"
+# define ERROR_MLX "Failed to initialize mlx"
+# define ERROR_TEXTURES "Failed to initialize textures"
+# define ERROR_WINDOW "Failed to initialize window"
+
+# define ID_NORTH "NO"
+# define ID_SOUTH "SO"
+# define ID_WEST "WE"
+# define ID_EAST "EA"
+# define ID_FLOOR "F"
+# define ID_CEIL "C"
 
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 360
@@ -63,10 +64,19 @@ typedef struct s_vec3 {
 }	t_vec3;
 
 typedef struct s_map {
-	int	**grid;
-	int	width;
-	int	height;
+	int		**grid;
+	int		width;
+	int		height;
 }	t_map;
+
+typedef struct s_infos {
+	int		floor;
+	int		ceil;
+	char	*path_north_texture;
+	char	*path_east_texture;
+	char	*path_south_texture;
+	char	*path_west_texture;
+}	t_infos;
 
 typedef struct s_mlx {
 	int		bytes_per_pixel;
@@ -77,11 +87,20 @@ typedef struct s_mlx {
 	void	*mlx;
 }	t_mlx;
 
+typedef struct s_textures {
+	void	*north;
+	void	*east;
+	void	*south;
+	void	*west;
+}	t_textures;
+
 typedef struct s_data {
-	int		frame;
-	t_mlx	mlx;
-	t_vec3	**pixels;
-	t_map	map;
+	t_vec3		**pixels; // either int ** or rm
+	int			frame;
+	t_mlx		mlx;
+	t_map		map;
+	t_infos		infos;
+	t_textures	textures;
 }	t_data;
 
 /******************************************************************************/
@@ -99,7 +118,7 @@ int			render_frame(t_data *data);
 /******************************************************************************/
 
 int			handle_key_down(int keycode, t_data *data);
-bool		init_minilibx(t_mlx *mlx, char *window_title);
+bool		init_minilibx(t_data *data, char *window_title);
 
 /******************************************************************************/
 /*                                                                            */
@@ -107,7 +126,9 @@ bool		init_minilibx(t_mlx *mlx, char *window_title);
 /*                                                                            */
 /******************************************************************************/
 
-bool		parse_map(t_map *map, int argc, char **argv);
+char		**get_lines(char *filename);
+bool		parse_file(t_data *data, int argc, char **argv);
+bool		parse_color(char *s, int *color);
 
 /******************************************************************************/
 /*                                                                            */

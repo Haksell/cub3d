@@ -35,6 +35,6 @@ void	ft_assert(char *test_name, bool result)
 
 int	main(void)
 {
-	test_parse_map();
+	test_parse_file();
 	return (definitely_not_a_global(false));
 }
