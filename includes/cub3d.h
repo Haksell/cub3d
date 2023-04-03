@@ -5,13 +5,12 @@
 # include "mlx.h"
 
 # include <fcntl.h>
-// # include <limits.h>
 # include <math.h>
-// # include <stdbool.h>
-// # include <stdlib.h>
-// # include <sys/stat.h>
-// # include <sys/types.h>
-// # include <unistd.h>
+# include <stdbool.h>
+# include <stdlib.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <unistd.h>
 # include <X11/keysym.h>
 # include <X11/Xlib.h>
 
@@ -64,6 +63,9 @@ typedef struct s_vec3 {
 }	t_vec3;
 
 typedef struct s_map {
+	int	**grid;
+	int	width;
+	int	height;
 }	t_map;
 
 typedef struct s_mlx {
