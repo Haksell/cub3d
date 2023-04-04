@@ -27,7 +27,7 @@ bool	parse_file(t_data *data, int argc, char **argv)
 		return (complain_bool(ERROR_PARSE_INFOS));
 	while (*lines != NULL && is_all_space(*lines))
 		++lines;
-	if (!parse_map(&data->map, lines))
+	if (!parse_map(data, lines))
 		return (complain_bool(ERROR_PARSE_MAP));
 	return (true);
 }

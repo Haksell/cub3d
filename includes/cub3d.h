@@ -96,13 +96,18 @@ typedef struct s_textures {
 	void	*west;
 }	t_textures;
 
+typedef struct s_player {
+	t_vec2	pos;
+	t_vec2	dir;
+}	t_player;
+
 typedef struct s_data {
-	t_vec2		**pixels; // either int ** or rm
 	int			frame;
 	t_mlx		mlx;
 	t_map		map;
 	t_infos		infos;
 	t_textures	textures;
+	t_player	player;
 }	t_data;
 
 /******************************************************************************/
@@ -140,7 +145,7 @@ char		**get_lines(char *filename);
 bool		parse_color(char *s, int *color);
 bool		parse_file(t_data *data, int argc, char **argv);
 bool		parse_infos(t_infos *infos, char ***lines);
-bool		parse_map(t_map *map, char **lines);
+bool		parse_map(t_data *data, char **lines);
 
 /******************************************************************************/
 /*                                                                            */
