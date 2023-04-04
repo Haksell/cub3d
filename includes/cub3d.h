@@ -34,6 +34,7 @@
 # define ERROR_INVALID_CHAR "Invalid character found in map"
 # define ERROR_NO_PLAYER "No player found in map"
 # define ERROR_MULTIPLAYER "Too many players found in map"
+# define ERROR_DUPLICATE_COLOR "Duplicate colors"
 
 # define ID_NORTH "NO"
 # define ID_SOUTH "SO"

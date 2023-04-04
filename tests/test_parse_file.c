@@ -36,7 +36,6 @@ static void	test(char *title, char *directory, bool expected)
 	{
 		init_data(&data);
 		filename = filenames->content;
-		ft_printf("%s\n", filename); // TODO remove
 		is_unreadable = ft_strcmp(filename, UNREADABLE_MAP) == 0;
 		if (is_unreadable)
 			chmod(UNREADABLE_MAP, 0000);

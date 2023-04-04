@@ -43,6 +43,8 @@ bool	parse_color(char *s, int *color)
 	char	*s2;
 	char	*s3;
 
+	if (*color != -1)
+		return (complain_bool(ERROR_DUPLICATE_COLOR));
 	if (!get_commas(s, &s2, &s3)
 		|| !parse_component(s, &r)
 		|| !parse_component(s2, &g)
