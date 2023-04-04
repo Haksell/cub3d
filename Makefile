@@ -26,7 +26,7 @@ vpath %.c ${PATH_SRCS}/mlx_tools
 SRCS += handle_key_down init_minilibx
 
 vpath %.c ${PATH_SRCS}/parsing
-SRCS += get_lines parse_file parse_color
+SRCS += get_lines parse_color parse_file parse_infos parse_map
 
 vpath %.c ${PATH_SRCS}/utils
 SRCS += arrays clean complain init_pixels

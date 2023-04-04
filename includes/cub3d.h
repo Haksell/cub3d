@@ -19,20 +19,18 @@
 # define BUFFER_SIZE_3D 16384
 
 # define USAGE_MANDATORY "Usage: ./cub3d *.cub"
-# define SPACY_LINE "Line contains only spaces and tabulations"
 # define OPEN_ERROR "File cannot be opened"
 # define MALLOC_ERROR "Impossible to allocate heap memory"
 # define READ_ERROR "Error while reading the file"
-
-# define ERROR_CYLINDER "Error parsing cylinder"
-# define ERROR_PLANE "Error parsing plane"
-# define ERROR_SPHERE "Error parsing sphere"
 
 # define ERROR_ADDR "Failed to initialize addr"
 # define ERROR_IMAGE "Failed to initialize image"
 # define ERROR_MLX "Failed to initialize mlx"
 # define ERROR_TEXTURES "Failed to initialize textures"
 # define ERROR_WINDOW "Failed to initialize window"
+
+# define ERROR_PARSE_INFOS "Failed to parse infos"
+# define ERROR_PARSE_MAP "Failed to parse map"
 
 # define ID_NORTH "NO"
 # define ID_SOUTH "SO"
@@ -127,8 +125,10 @@ bool		init_minilibx(t_data *data, char *window_title);
 /******************************************************************************/
 
 char		**get_lines(char *filename);
-bool		parse_file(t_data *data, int argc, char **argv);
 bool		parse_color(char *s, int *color);
+bool		parse_file(t_data *data, int argc, char **argv);
+bool		parse_infos(t_infos *infos, char ***lines);
+bool		parse_map(t_map *map, char **lines);
 
 /******************************************************************************/
 /*                                                                            */
