@@ -50,6 +50,8 @@
 # define PLAYER_CHARACTERS "NESW"
 # define NON_WALL_CHARACTERS "0NESW"
 
+# define CAMERA_FOV 0.66
+
 /******************************************************************************/
 /*                                                                            */
 /*                                  STRUCTS                                   */
@@ -101,9 +103,10 @@ typedef struct s_data {
 	int			frame;
 	t_mlx		mlx;
 	t_map		map;
+	t_vec2		camera;
 	t_infos		infos;
-	t_textures	textures;
 	t_player	player;
+	t_textures	textures;
 }	t_data;
 
 /******************************************************************************/

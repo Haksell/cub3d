@@ -42,6 +42,30 @@ static bool	init_map(t_map *map, char **lines)
 	return (true);
 }
 
+static void	set_dir_and_camera(t_data *data, char c)
+{
+	if (c == 'N')
+	{
+		data->player.dir = (t_vec2){0, -1};
+		data->camera = (t_vec2){-CAMERA_FOV, 0};
+	}
+	else if (c == 'E')
+	{
+		data->player.dir = (t_vec2){1, 0};
+		data->camera = (t_vec2){0, -CAMERA_FOV};
+	}
+	else if (c == 'S')
+	{
+		data->player.dir = (t_vec2){0, 1};
+		data->camera = (t_vec2){CAMERA_FOV, 0};
+	}
+	else
+	{
+		data->player.dir = (t_vec2){-1, 0};
+		data->camera = (t_vec2){0, CAMERA_FOV};
+	}
+}
+
 static bool	valid_character(t_data *data, int y, int x)
 {
 	const char	c = data->map.grid[y][x];
@@ -55,14 +79,7 @@ static bool	valid_character(t_data *data, int y, int x)
 		else
 		{
 			data->player.pos = (t_vec2){x, y};
-			if (c == 'N')
-				data->player.dir = (t_vec2){0, -1};
-			else if (c == 'E')
-				data->player.dir = (t_vec2){1, 0};
-			else if (c == 'S')
-				data->player.dir = (t_vec2){0, 1};
-			else
-				data->player.dir = (t_vec2){-1, 0};
+			set_dir_and_camera(data, c);
 		}
 	}
 	return (true);

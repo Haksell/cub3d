@@ -11,9 +11,7 @@ MLX := ${PATH_MLX}/libmlx.a
 GARBAGE := .vscode
 INCLUDES := -I./${PATH_INCLUDES} -I./${PATH_LIBFT}/includes -I./${PATH_MLX}
 CC := cc -Wall -Wextra -Werror -O3 -g3
-YEET1 := 1>/dev/null
-YEET2 := 2>/dev/null
-YEET := ${YEET1} ${YEET2}
+YEET := 1>/dev/null 2>/dev/null
 MLX_REPO := git@github.com:42Paris/minilibx-linux.git
 LIBRARIES := -L${PATH_LIBFT} -lft -L${PATH_MLX} -lmlx -lXext -lX11 -lm
 GREEN := "\033[1;32m"
@@ -85,7 +83,7 @@ norm:
 	./scripts/niih ${PATH_LIBFT} ${PATH_INCLUDES} ${PATH_SRCS} ${PATH_TESTS}
 
 test: ${TEST}
-	@./${TEST} ${YEET2}
+	@./${TEST} 2>/tmp/test3d.err
 
 norm_test: norm test
 
