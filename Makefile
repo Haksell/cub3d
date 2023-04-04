@@ -15,7 +15,7 @@ YEET1 := 1>/dev/null
 YEET2 := 2>/dev/null
 YEET := ${YEET1} ${YEET2}
 MLX_REPO := git@github.com:42Paris/minilibx-linux.git
-LIBRARIES := -L${PATH_LIBFT} -lft -lX11 -lXext -L${PATH_MLX} -lmlx -lm
+LIBRARIES := -L${PATH_LIBFT} -lft -L${PATH_MLX} -lmlx -lXext -lX11 -lm
 GREEN := "\033[1;32m"
 RESET := "\033[0;0m"
 
