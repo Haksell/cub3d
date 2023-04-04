@@ -4,10 +4,6 @@ static bool	load_textures(t_data *data)
 {
 	int	_;
 
-	printf("KOKO[%s]\n", data->infos.path_north_texture);
-	printf("LOL[%s]\n", data->infos.path_east_texture);
-	printf("%s\n", data->infos.path_south_texture);
-	printf("%s\n", data->infos.path_west_texture);
 	data->textures.north = mlx_xpm_file_to_image(
 			data->mlx.mlx, data->infos.path_north_texture, &_, &_);
 	data->textures.east = mlx_xpm_file_to_image(

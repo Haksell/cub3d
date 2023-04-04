@@ -1,12 +1,5 @@
 #include "cub3d.h"
 
-static void	init_data(t_data *data)
-{
-	ft_bzero(data, sizeof(t_data));
-	data->infos.floor = -1;
-	data->infos.ceil = -1;
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	data;

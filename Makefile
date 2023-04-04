@@ -19,6 +19,9 @@ LIBRARIES := -L${PATH_LIBFT} -lft -L${PATH_MLX} -lmlx -lXext -lX11 -lm
 GREEN := "\033[1;32m"
 RESET := "\033[0;0m"
 
+vpath %.c ${PATH_SRCS}
+SRCS += debug # TODO remove
+
 vpath %.c ${PATH_SRCS}/display
 SRCS += render_frame
 
@@ -29,7 +32,7 @@ vpath %.c ${PATH_SRCS}/parsing
 SRCS += get_lines parse_color parse_file parse_infos parse_map
 
 vpath %.c ${PATH_SRCS}/utils
-SRCS += arrays clean complain init_pixels
+SRCS += arrays clean complain init_data init_pixels
 
 vpath %.c ${PATH_SRCS}/vec3
 SRCS += vec3a vec3b vec3c
@@ -40,9 +43,9 @@ ifeq (test, ${findstring test, ${MAKECMDGOALS}})
 	SRCS += test3d test_parse_file
 else
 	HEADERS := cub3d
-	vpath %.c ${PATH_SRCS}
 	SRCS += main
 endif
+
 
 SRCS := ${addsuffix .c, ${SRCS}}
 OBJS := ${patsubst %.c, ${PATH_OBJS}/%.o, ${SRCS}}

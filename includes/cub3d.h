@@ -31,6 +31,9 @@
 
 # define ERROR_PARSE_INFOS "Failed to parse infos"
 # define ERROR_PARSE_MAP "Failed to parse map"
+# define ERROR_INVALID_CHAR "Invalid character found in map"
+# define ERROR_NO_PLAYER "No player found in map"
+# define ERROR_MULTIPLAYER "Too many players found in map"
 
 # define ID_NORTH "NO"
 # define ID_SOUTH "SO"
@@ -41,9 +44,10 @@
 
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 360
-# define MAX_DEPTH 25
-# define SHADOW_ACNE_FIX 1e-3
 # define SPACES " \f\n\r\t\v"
+# define MAP_CHARACTERS ".01"
+# define PLAYER_CHARACTERS "NESW"
+# define NON_WALL_CHARACTERS "0NESW"
 
 # define SURFACES_CYLINDER 3
 # define SURFACES_PLANE 1
@@ -62,9 +66,9 @@ typedef struct s_vec3 {
 }	t_vec3;
 
 typedef struct s_map {
-	int		**grid;
 	int		width;
 	int		height;
+	char	**grid;
 }	t_map;
 
 typedef struct s_infos {
@@ -100,6 +104,14 @@ typedef struct s_data {
 	t_infos		infos;
 	t_textures	textures;
 }	t_data;
+
+/******************************************************************************/
+/*                                                                            */
+/*                                   DEBUG                                    */
+/*                                                                            */
+/******************************************************************************/
+
+void		display_map(t_map *map); // TODO remove
 
 /******************************************************************************/
 /*                                                                            */
@@ -143,10 +155,16 @@ int			complain_int(char *error_message);
 void		*complain_ptr(char *error_message);
 void		free_data(t_data *data);
 bool		includes(char **arr, char *s);
+void		init_data(t_data *data);
 bool		init_pixels(t_data *data);
 bool		is_close(double x, double y);
 
-// vec3
+/******************************************************************************/
+/*                                                                            */
+/*                                    VEC3                                    */
+/*                                                                            */
+/******************************************************************************/
+
 t_vec3		vec3_add(t_vec3 v1, t_vec3 v2);
 t_vec3		vec3_cross(t_vec3 v1, t_vec3 v2);
 double		vec3_dist(t_vec3 v1, t_vec3 v2);

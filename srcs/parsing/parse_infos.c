@@ -44,7 +44,7 @@ bool	parse_infos(t_infos *infos, char ***lines)
 {
 	char	**line;
 
-	while (*lines != NULL)
+	while (*lines != NULL && **lines != NULL)
 	{
 		line = ft_split(**lines, ' ');
 		if (line == NULL || !parse_info(infos, line))
