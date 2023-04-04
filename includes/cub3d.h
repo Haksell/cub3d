@@ -50,10 +50,6 @@
 # define PLAYER_CHARACTERS "NESW"
 # define NON_WALL_CHARACTERS "0NESW"
 
-# define SURFACES_CYLINDER 3
-# define SURFACES_PLANE 1
-# define SURFACES_SPHERE 1
-
 /******************************************************************************/
 /*                                                                            */
 /*                                  STRUCTS                                   */
