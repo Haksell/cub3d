@@ -32,10 +32,10 @@ vpath %.c ${PATH_SRCS}/parsing
 SRCS += get_lines parse_color parse_file parse_infos parse_map
 
 vpath %.c ${PATH_SRCS}/utils
-SRCS += arrays clean complain init_data init_pixels
+SRCS += arrays clean complain init_data
 
-vpath %.c ${PATH_SRCS}/vec3
-SRCS += vec3a vec3b vec3c
+vpath %.c ${PATH_SRCS}/vec2
+SRCS += vec2a vec2b vec2c
 
 ifeq (test, ${findstring test, ${MAKECMDGOALS}})
 	HEADERS := test3d
