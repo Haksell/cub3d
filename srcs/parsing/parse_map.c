@@ -42,25 +42,27 @@ static bool	init_map(t_map *map, char **lines)
 	return (true);
 }
 
-static bool	valid_character(t_player *player, char c, int y, int x)
+static bool	valid_character(t_data *data, int y, int x)
 {
+	const char	c = data->map.grid[y][x];
+
 	if (ft_strchr(MAP_CHARACTERS, c) == NULL)
 	{
 		if (ft_strchr(PLAYER_CHARACTERS, c) == NULL)
 			return (complain_bool(ERROR_INVALID_CHAR));
-		else if (player->pos.x != -1)
+		else if (data->player.pos.x != -1)
 			return (complain_bool(ERROR_MULTIPLAYER));
 		else
 		{
-			player->pos = (t_vec2){x, y};
+			data->player.pos = (t_vec2){x, y};
 			if (c == 'N')
-				player->dir = (t_vec2){0, -1};
+				data->player.dir = (t_vec2){0, -1};
 			else if (c == 'E')
-				player->dir = (t_vec2){1, 0};
+				data->player.dir = (t_vec2){1, 0};
 			else if (c == 'S')
-				player->dir = (t_vec2){0, 1};
+				data->player.dir = (t_vec2){0, 1};
 			else
-				player->dir = (t_vec2){-1, 0};
+				data->player.dir = (t_vec2){-1, 0};
 		}
 	}
 	return (true);
@@ -77,7 +79,7 @@ static bool	valid_characters(t_data *data)
 		x = 0;
 		while (x < data->map.width)
 		{
-			if (!valid_character(&data->player, data->map.grid[y][x], y, x))
+			if (!valid_character(data, y, x))
 				return (false);
 			++x;
 		}
