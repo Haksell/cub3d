@@ -21,9 +21,9 @@ int	handle_key_down(int keycode, t_data *data)
 	else if (keycode == XK_Left || keycode == XK_Right)
 	{
 		if (keycode == XK_Left)
-			turn = TURN;
-		else
 			turn = -TURN;
+		else
+			turn = TURN;
 		data->player.dir = vec2_rotate(data->player.dir, turn);
 		data->camera = vec2_rotate(data->camera, turn);
 	}

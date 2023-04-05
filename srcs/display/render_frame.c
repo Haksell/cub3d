@@ -50,15 +50,15 @@ int	render_frame(t_data *data)
 	int		color;
 
 	x = 0;
-	printf("data->frame=%d\n", data->frame);
-	printf("pos.x=%.3lf\n", data->player.pos.x);
-	printf("pos.y=%.3lf\n", data->player.pos.y);
-	printf("dir.x=%.3lf\n", data->player.dir.x);
-	printf("dir.y=%.3lf\n", data->player.dir.y);
-	printf("\n");
+	// printf("data->frame=%d\n", data->frame);
+	// printf("pos.x=%.3lf\n", data->player.pos.x);
+	// printf("pos.y=%.3lf\n", data->player.pos.y);
+	// printf("dir.x=%.3lf\n", data->player.dir.x);
+	// printf("dir.y=%.3lf\n", data->player.dir.y);
+	// printf("\n");
 	while (x < WINDOW_WIDTH)
 	{
-		camera_x = 2 * x / ((double)WINDOW_WIDTH - 1) - 1;
+		camera_x = -(2 * x / ((double)WINDOW_WIDTH - 1) - 1);
 		ray_dir_x = data->player.dir.x + data->camera.x * camera_x;
 		ray_dir_y = data->player.dir.y + data->camera.y * camera_x;
 		map_x = (int)data->player.pos.x;
@@ -110,9 +110,19 @@ int	render_frame(t_data *data)
 			perp_wall_dist = side_dist_x - delta_dist_x;
 		line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
 		if (is_vertical)
-			color = 0x0000ff;
+		{
+			if (step_y < 0)
+				color = 0x0000ff;
+			else
+				color = 0xff0000;
+		}
 		else
-			color = 0x808080;
+		{
+			if (step_x < 0)
+				color = 0x00ff00;
+			else
+				color = 0x808080;
+		}
 		draw_vertical_line(data, x, line_height, color);
 		++x;
 	}

@@ -2,8 +2,8 @@ NO textures/wood.xpm
 SO textures/redbrick.xpm
 WE textures/eagle.xpm
 EA textures/colorstone.xpm
-C 0,255,0
-F 255,0,0
+C 255,255,255
+F 0,0,0
 
 111111111111111111111111
 100000000000000000000001

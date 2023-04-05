@@ -19,6 +19,9 @@
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720
 
+# define TEXTURE_HEIGHT 64
+# define TEXTURE_WINDOW 64
+
 # define BUFFER_SIZE_3D 16384
 
 # define USAGE_MANDATORY "Usage: ./cub3d *.cub"
@@ -53,7 +56,7 @@
 
 # define CAMERA_FOV 0.66
 # define SPEED 0.8
-# define TURN 0.1
+# define TURN 0.15
 
 /******************************************************************************/
 /*                                                                            */
