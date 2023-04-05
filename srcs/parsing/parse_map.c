@@ -78,7 +78,7 @@ static bool	valid_character(t_data *data, int y, int x)
 			return (complain_bool(ERROR_MULTIPLAYER));
 		else
 		{
-			data->player.pos = (t_vec2){x, y};
+			data->player.pos = (t_vec2){x + 0.5, y + 0.5}; // TODO try without 0.5
 			set_dir_and_camera(data, c);
 		}
 	}
