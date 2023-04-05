@@ -92,13 +92,12 @@ typedef struct s_mlx {
 }	t_mlx;
 
 typedef struct s_texture {
-	int		width;
-	int		height;
-	int		bits_per_pixel;
-	int		endian;
-	int		size_line;
-	void	*img;
-	char	*data;
+	int				width;
+	int				height;
+	int				bytes_per_pixel;
+	int				size_line;
+	void			*img;
+	unsigned char	*addr;
 }	t_texture;
 
 typedef struct s_textures {

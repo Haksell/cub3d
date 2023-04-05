@@ -2,13 +2,16 @@
 
 static bool	load_texture(void *mlx, char *path, t_texture *texture)
 {
+	int	_;
+
 	texture->img = mlx_xpm_file_to_image(mlx, path,
 			&texture->width, &texture->height);
 	if (texture->img == NULL)
 		return (complain_bool(ERROR_TEXTURES));
-	texture->data = mlx_get_data_addr(texture->img, &texture->bits_per_pixel,
-			&texture->size_line, &texture->endian);
-	if (texture->data == NULL)
+	texture->addr = (unsigned char *)mlx_get_data_addr(texture->img,
+			&texture->bytes_per_pixel, &texture->size_line, &_);
+	texture->bytes_per_pixel >>= 3;
+	if (texture->addr == NULL)
 		return (complain_bool(ERROR_TEXTURES));
 	return (true);
 }

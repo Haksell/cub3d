@@ -5,7 +5,7 @@ static void	pixel_put(t_mlx *mlx, int x, int y, int color)
 	mlx->addr[mlx->line_length * y + mlx->bytes_per_pixel * x] = color;
 }
 
-static void	draw_vertical_line(t_data *data, int x, int tex_x, int line_height, bool is_vertical)
+static void	draw_vertical_line(t_data *data, int x, int tex_x, int line_height, bool is_vertical, t_texture texture)
 {
 	double	step;
 	double	tex_pos;
@@ -25,7 +25,7 @@ static void	draw_vertical_line(t_data *data, int x, int tex_x, int line_height, 
 	draw_end = (WINDOW_HEIGHT - 1) / 2 + line_height / 2;
 	if (draw_end > WINDOW_HEIGHT - 1)
 		draw_end = WINDOW_HEIGHT - 1;
-	step = (double)data->textures.east.height / line_height;
+	step = (double)texture.height / line_height;
 	tex_pos = (draw_start - WINDOW_HEIGHT / 2 + line_height / 2) * step;
 	y = 0;
 	while (y < WINDOW_HEIGHT)
@@ -36,12 +36,12 @@ static void	draw_vertical_line(t_data *data, int x, int tex_x, int line_height, 
 			pixel_put(&data->mlx, x, y, data->infos.floor);
 		else
 		{
-			tex_y = clamp((int)tex_pos, 0, data->textures.east.height - 1);
+			tex_y = clamp((int)tex_pos, 0, texture.height - 1);
 			tex_pos += step;
-			pixel_index = (tex_y * data->textures.east.size_line) + (tex_x * (data->textures.east.bits_per_pixel / 8));
-			red = (unsigned int)data->textures.east.data[pixel_index + 2];
-			green = (unsigned char)data->textures.east.data[pixel_index + 1];
-			blue = (unsigned char)data->textures.east.data[pixel_index + 0];
+			pixel_index = tex_y * texture.size_line + tex_x * texture.bytes_per_pixel;
+			red = texture.addr[pixel_index + 2];
+			green = texture.addr[pixel_index + 1];
+			blue = texture.addr[pixel_index + 0];
 			color = red << 16 | green << 8 | blue;
 			if (is_vertical)
 				color = (color & 0xfefefe) >> 1;
@@ -53,23 +53,24 @@ static void	draw_vertical_line(t_data *data, int x, int tex_x, int line_height, 
 
 int	render_frame(t_data *data)
 {
-	double	camera_x;
-	double	wall_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wall_dist;
-	bool	is_vertical;
-	int		tex_x;
-	int		line_height;
-	int		map_x;
-	int		map_y;
-	int		step_x;
-	int		step_y;
-	int		x;
+	t_texture	texture;
+	double		camera_x;
+	double		wall_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	bool		is_vertical;
+	int			tex_x;
+	int			line_height;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	int			x;
 
 	x = 0;
 	while (x < WINDOW_WIDTH)
@@ -129,10 +130,23 @@ int	render_frame(t_data *data)
 			wall_x = data->player.pos.x + perp_wall_dist * ray_dir_x;
 		else
 			wall_x = data->player.pos.y + perp_wall_dist * ray_dir_y;
+		if (is_vertical)
+		{
+			texture = data->textures.north;
+			if (ray_dir_y < 0)
+				texture = data->textures.south;
+		}
+		else
+		{
+			texture = data->textures.east;
+			if (ray_dir_x > 0)
+				texture = data->textures.west;
+		}
 		wall_x -= floor(wall_x);
-		tex_x = (int)(wall_x * 64); // TODO texture width
-		// TODO inverse texture
-		draw_vertical_line(data, x, tex_x, line_height, is_vertical);
+		tex_x = (int)(wall_x * texture.width);
+		if ((is_vertical && ray_dir_y < 0) || (!is_vertical && ray_dir_x > 0))
+			tex_x = texture.width - tex_x - 1;
+		draw_vertical_line(data, x, tex_x, line_height, is_vertical, texture);
 		++x;
 	}
 	++data->frame;
