@@ -50,8 +50,12 @@ int	render_frame(t_data *data)
 	int		color;
 
 	x = 0;
+	printf("data->frame=%d\n", data->frame);
 	printf("pos.x=%.3lf\n", data->player.pos.x);
 	printf("pos.y=%.3lf\n", data->player.pos.y);
+	printf("dir.x=%.3lf\n", data->player.dir.x);
+	printf("dir.y=%.3lf\n", data->player.dir.y);
+	printf("\n");
 	while (x < WINDOW_WIDTH)
 	{
 		camera_x = 2 * x / ((double)WINDOW_WIDTH - 1) - 1;
@@ -95,7 +99,9 @@ int	render_frame(t_data *data)
 				map_y += step_y;
 				is_vertical = true;
 			}
-			if (data->map.grid[map_y][map_x] == '1')
+			if (map_x < 0 || map_x >= data->map.width
+				|| map_y < 0 || map_y >= data->map.height
+				|| data->map.grid[map_y][map_x] == '1')
 				break ;
 		}
 		if (is_vertical)
@@ -111,7 +117,6 @@ int	render_frame(t_data *data)
 		++x;
 	}
 	++data->frame;
-	printf("data->frame=%d\n", data->frame);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 	return (EXIT_SUCCESS);
 }

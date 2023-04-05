@@ -16,6 +16,9 @@
 
 # include <stdio.h> // TODO remove
 
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
+
 # define BUFFER_SIZE_3D 16384
 
 # define USAGE_MANDATORY "Usage: ./cub3d *.cub"
@@ -43,15 +46,14 @@
 # define ID_FLOOR "F"
 # define ID_CEIL "C"
 
-# define WINDOW_WIDTH 640
-# define WINDOW_HEIGHT 360
 # define SPACES " \f\n\r\t\v"
 # define MAP_CHARACTERS ".01"
 # define PLAYER_CHARACTERS "NESW"
 # define NON_WALL_CHARACTERS "0NESW"
 
 # define CAMERA_FOV 0.66
-# define MOVEMENT 0.8
+# define SPEED 0.8
+# define TURN 0.1
 
 /******************************************************************************/
 /*                                                                            */
@@ -159,9 +161,7 @@ bool		complain_bool(char *error_message);
 int			complain_int(char *error_message);
 void		*complain_ptr(char *error_message);
 void		free_data(t_data *data);
-bool		includes(char **arr, char *s);
 void		init_data(t_data *data);
-bool		is_close(double x, double y);
 
 /******************************************************************************/
 /*                                                                            */
@@ -178,6 +178,7 @@ double		vec2_length(t_vec2 v);
 double		vec2_length_squared(t_vec2 v);
 t_vec2		vec2_mul(t_vec2 v1, t_vec2 v2);
 t_vec2		vec2_negate(t_vec2 v);
+t_vec2		vec2_rotate(t_vec2 v, double angle);
 t_vec2		vec2_scale(t_vec2 v, double t);
 t_vec2		vec2_sub(t_vec2 v1, t_vec2 v2);
 t_vec2		vec2_unit(t_vec2 v);
