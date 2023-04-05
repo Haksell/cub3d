@@ -144,7 +144,7 @@ int			render_frame(t_data *data);
 /*                                                                            */
 /******************************************************************************/
 
-int			handle_key_down(int keycode, t_data *data);
+int			handle_key_press(int keycode, t_data *data);
 bool		init_minilibx(t_data *data, char *window_title);
 
 /******************************************************************************/
