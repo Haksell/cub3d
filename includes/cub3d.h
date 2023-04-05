@@ -51,6 +51,7 @@
 # define NON_WALL_CHARACTERS "0NESW"
 
 # define CAMERA_FOV 0.66
+# define MOVEMENT 0.8
 
 /******************************************************************************/
 /*                                                                            */

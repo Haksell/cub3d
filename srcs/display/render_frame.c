@@ -17,10 +17,6 @@ static void	draw_vertical_line(t_data *data, int x, int line_height, int color)
 	draw_end = (WINDOW_HEIGHT - 1) / 2 + line_height / 2;
 	if (draw_end > WINDOW_HEIGHT - 1)
 		draw_end = WINDOW_HEIGHT - 1;
-	printf("line_height=%d\n", line_height);
-	printf("draw_start=%d\n", draw_start);
-	printf("draw_end=%d\n\n", draw_end);
-
 	y = 0;
 	while (y < WINDOW_HEIGHT)
 	{
@@ -54,6 +50,8 @@ int	render_frame(t_data *data)
 	int		color;
 
 	x = 0;
+	printf("pos.x=%.3lf\n", data->player.pos.x);
+	printf("pos.y=%.3lf\n", data->player.pos.y);
 	while (x < WINDOW_WIDTH)
 	{
 		camera_x = 2 * x / ((double)WINDOW_WIDTH - 1) - 1;
@@ -100,13 +98,10 @@ int	render_frame(t_data *data)
 			if (data->map.grid[map_y][map_x] == '1')
 				break ;
 		}
-		printf("delta_dist_y =%.3lf\n", delta_dist_y);
-		printf("side_dst_y=%.3lf\n", side_dist_y);
 		if (is_vertical)
 			perp_wall_dist = side_dist_y - delta_dist_y;
 		else
 			perp_wall_dist = side_dist_x - delta_dist_x;
-		printf("perp_wall_dist=%.3lf\n", perp_wall_dist);
 		line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
 		if (is_vertical)
 			color = 0x0000ff;
