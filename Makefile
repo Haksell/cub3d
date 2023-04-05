@@ -30,7 +30,7 @@ vpath %.c ${PATH_SRCS}/parsing
 SRCS += get_lines parse_color parse_file parse_infos parse_map
 
 vpath %.c ${PATH_SRCS}/utils
-SRCS += arrays clean complain init_data
+SRCS += arrays clean complain init_data math
 
 vpath %.c ${PATH_SRCS}/vec2
 SRCS += vec2a vec2b vec2c

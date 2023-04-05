@@ -49,7 +49,7 @@ bool	parse_color(char *s, int *color)
 		|| !parse_component(s, &r)
 		|| !parse_component(s2, &g)
 		|| !parse_component(s3, &b))
-		return (false);
+		return (complain_bool(ERROR_PARSING_COLOR));
 	*color = r << 16 | g << 8 | b;
 	return (true);
 }

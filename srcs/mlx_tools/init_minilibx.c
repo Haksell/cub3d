@@ -1,21 +1,32 @@
 #include "cub3d.h"
 
+static bool	load_texture(void *mlx, char *path, t_texture *texture)
+{
+	texture->img = mlx_xpm_file_to_image(mlx, path,
+			&texture->width, &texture->height);
+	if (texture->img == NULL)
+		return (complain_bool(ERROR_TEXTURES));
+	texture->data = mlx_get_data_addr(texture->img, &texture->bits_per_pixel,
+			&texture->size_line, &texture->endian);
+	if (texture->data == NULL)
+		return (complain_bool(ERROR_TEXTURES));
+	return (true);
+}
+
 static bool	load_textures(t_data *data)
 {
-	int	_;
-
-	data->textures.north = mlx_xpm_file_to_image(
-			data->mlx.mlx, data->infos.path_north_texture, &_, &_);
-	data->textures.east = mlx_xpm_file_to_image(
-			data->mlx.mlx, data->infos.path_east_texture, &_, &_);
-	data->textures.south = mlx_xpm_file_to_image(
-			data->mlx.mlx, data->infos.path_south_texture, &_, &_);
-	data->textures.west = mlx_xpm_file_to_image(
-			data->mlx.mlx, data->infos.path_west_texture, &_, &_);
-	return (data->textures.north != NULL
-		&& data->textures.east != NULL
-		&& data->textures.south != NULL
-		&& data->textures.west != NULL);
+	return (load_texture(data->mlx.mlx,
+			data->infos.path_north_texture,
+			&data->textures.north)
+		&& load_texture(data->mlx.mlx,
+			data->infos.path_east_texture,
+			&data->textures.east)
+		&& load_texture(data->mlx.mlx,
+			data->infos.path_south_texture,
+			&data->textures.south)
+		&& load_texture(data->mlx.mlx,
+			data->infos.path_west_texture,
+			&data->textures.west));
 }
 
 bool	init_minilibx(t_data *data, char *window_title)
@@ -26,7 +37,7 @@ bool	init_minilibx(t_data *data, char *window_title)
 	if (data->mlx.mlx == NULL)
 		return (complain_bool(ERROR_MLX));
 	if (!load_textures(data))
-		return (complain_bool(ERROR_TEXTURES));
+		return (false);
 	data->mlx.win = mlx_new_window(data->mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
 			window_title);
 	if (data->mlx.win == NULL)

@@ -19,9 +19,6 @@
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720
 
-# define TEXTURE_HEIGHT 64
-# define TEXTURE_WINDOW 64
-
 # define BUFFER_SIZE_3D 16384
 
 # define USAGE_MANDATORY "Usage: ./cub3d *.cub"
@@ -41,6 +38,7 @@
 # define ERROR_NO_PLAYER "No player found in map"
 # define ERROR_MULTIPLAYER "Too many players found in map"
 # define ERROR_DUPLICATE_COLOR "Duplicate colors"
+# define ERROR_PARSING_COLOR "Failed to parse color"
 
 # define ID_NORTH "NO"
 # define ID_SOUTH "SO"
@@ -55,8 +53,8 @@
 # define NON_WALL_CHARACTERS "0NESW"
 
 # define CAMERA_FOV 0.66
-# define SPEED 0.8
-# define TURN 0.15
+# define SPEED 0.38
+# define TURN 0.1308996938995747
 
 /******************************************************************************/
 /*                                                                            */
@@ -93,11 +91,21 @@ typedef struct s_mlx {
 	void	*mlx;
 }	t_mlx;
 
+typedef struct s_texture {
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		endian;
+	int		size_line;
+	void	*img;
+	char	*data;
+}	t_texture;
+
 typedef struct s_textures {
-	void	*north;
-	void	*east;
-	void	*south;
-	void	*west;
+	t_texture	north;
+	t_texture	east;
+	t_texture	south;
+	t_texture	west;
 }	t_textures;
 
 typedef struct s_player {
@@ -159,6 +167,7 @@ bool		parse_map(t_data *data, char **lines);
 /******************************************************************************/
 
 int			arrlen(char **lines);
+int			clamp(int n, int min, int max);
 int			close_window(t_data *data);
 bool		complain_bool(char *error_message);
 int			complain_int(char *error_message);
