@@ -10,10 +10,10 @@ static bool	load_texture(void *mlx, char *path, t_texture *texture)
 		return (complain_bool(ERROR_TEXTURES));
 	texture->addr = (unsigned int *)mlx_get_data_addr(texture->img,
 			&texture->bytes_per_pixel, &texture->size_line, &_);
-	texture->size_line >>= 2;
-	texture->bytes_per_pixel >>= 5;
 	if (texture->addr == NULL)
 		return (complain_bool(ERROR_TEXTURES));
+	texture->size_line >>= 2;
+	texture->bytes_per_pixel >>= 5;
 	return (true);
 }
 

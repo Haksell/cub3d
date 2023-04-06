@@ -22,13 +22,13 @@ static bool	init_map(t_map *map, char **lines)
 	get_map_dimensions(map, lines);
 	map->grid = ft_calloc(map->height + 1, sizeof(char *));
 	if (map->grid == NULL)
-		return (complain_bool(MALLOC_ERROR));
+		return (complain_bool(ERROR_MALLOC));
 	i = 0;
 	while (lines[i] != NULL)
 	{
 		map->grid[i] = ft_calloc(map->width + 1, sizeof(char));
 		if (map->grid[i] == NULL)
-			return (complain_bool(MALLOC_ERROR));
+			return (complain_bool(ERROR_MALLOC));
 		ft_strlcpy(map->grid[i], lines[i], map->width + 1);
 		j = 0;
 		while (j < map->width)

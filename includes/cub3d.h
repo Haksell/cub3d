@@ -22,9 +22,9 @@
 # define BUFFER_SIZE_3D 16384
 
 # define USAGE_MANDATORY "Usage: ./cub3d *.cub"
-# define OPEN_ERROR "File cannot be opened"
-# define MALLOC_ERROR "Impossible to allocate heap memory"
-# define READ_ERROR "Error while reading the file"
+# define ERROR_OPEN "File cannot be opened"
+# define ERROR_MALLOC "Impossible to allocate heap memory"
+# define ERROR_READ "Error while reading the file"
 
 # define ERROR_ADDR "Failed to initialize addr"
 # define ERROR_IMAGE "Failed to initialize image"
@@ -38,7 +38,11 @@
 # define ERROR_NO_PLAYER "No player found in map"
 # define ERROR_MULTIPLAYER "Too many players found in map"
 # define ERROR_DUPLICATE_COLOR "Duplicate colors"
+# define ERROR_DUPLICATE_TEXTURE "Duplicate texture"
 # define ERROR_PARSING_COLOR "Failed to parse color"
+# define ERROR_INCOMPLETE_WALL "Wall is incomplete"
+# define ERROR_PARSING_LINE "Failed to parse line"
+# define ERROR_INVALID_IDENTIFIER "Invalid identifier"
 
 # define ID_NORTH "NO"
 # define ID_SOUTH "SO"

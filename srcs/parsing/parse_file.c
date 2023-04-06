@@ -22,12 +22,12 @@ bool	parse_file(t_data *data, int argc, char **argv)
 		return (complain_bool(USAGE_MANDATORY));
 	lines = get_lines(argv[1]);
 	if (lines == NULL)
-		return (complain_bool(MALLOC_ERROR));
+		return (false);
 	if (!parse_infos(&data->infos, &lines))
-		return (complain_bool(ERROR_PARSE_INFOS));
+		return (false);
 	while (*lines != NULL && is_all_space(*lines))
 		++lines;
 	if (!parse_map(data, lines))
-		return (complain_bool(ERROR_PARSE_MAP));
+		return (false);
 	return (true);
 }

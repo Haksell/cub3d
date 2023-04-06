@@ -84,7 +84,7 @@ norm:
 	./scripts/niih ${PATH_LIBFT} ${PATH_INCLUDES} ${PATH_SRCS} ${PATH_TESTS}
 
 test: ${TEST}
-	@./${TEST} 2>/tmp/test3d.err
+	@./${TEST}
 
 norm_test: norm test
 

@@ -23,7 +23,7 @@ bool	is_map_walled(t_map *map)
 					|| is_outside(map, y, x + 1)
 					|| is_outside(map, y + 1, x)
 					|| is_outside(map, y, x - 1)))
-				return (false);
+				return (complain_bool(ERROR_INCOMPLETE_WALL));
 			++x;
 		}
 		++y;

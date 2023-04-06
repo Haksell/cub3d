@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_lines.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haksell <haksell@student.42.fr>            +#+  +:+       +#+        */
+/*   By: axbrisse <axbrisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 19:55:26 by axbrisse          #+#    #+#             */
-/*   Updated: 2023/04/04 19:45:55 by haksell          ###   ########.fr       */
+/*   Updated: 2023/04/06 05:25:47 by axbrisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static ssize_t	count_file_size(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (complain_int(OPEN_ERROR));
+		return (complain_int(ERROR_OPEN));
 	total = 0;
 	while (true)
 	{
@@ -29,7 +29,7 @@ static ssize_t	count_file_size(char *filename)
 		if (read_bytes == -1)
 		{
 			close(fd);
-			return (complain_int(READ_ERROR));
+			return (complain_int(ERROR_READ));
 		}
 		total += read_bytes;
 		if (read_bytes < BUFFER_SIZE_3D)
@@ -52,15 +52,15 @@ static char	*get_file_content(char *filename)
 		return (NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (complain_ptr(OPEN_ERROR));
+		return (complain_ptr(ERROR_OPEN));
 	res = malloc((total + 1) * sizeof(char));
 	if (res == NULL)
-		return (close(fd), complain_ptr(MALLOC_ERROR));
+		return (close(fd), complain_ptr(ERROR_MALLOC));
 	res[total] = '\0';
 	bytes = read(fd, res, total);
 	close(fd);
 	if (bytes < total)
-		return (free(res), complain_ptr(READ_ERROR));
+		return (free(res), complain_ptr(ERROR_READ));
 	return (res);
 }
 
@@ -88,11 +88,11 @@ static char	**split_lines(char *file_content)
 
 	file_content = ft_strtrim(file_content, "\n");
 	if (file_content == NULL)
-		return (NULL);
+		return (complain_ptr(ERROR_MALLOC));
 	num_lines = count_lines(file_content);
 	lines = ft_calloc(num_lines + 1, sizeof(char *));
 	if (lines == NULL)
-		return (free(file_content), NULL);
+		return (free(file_content), complain_ptr(ERROR_MALLOC));
 	lines[0] = file_content;
 	arr_idx = 1;
 	i = 0;
@@ -118,7 +118,5 @@ char	**get_lines(char *filename)
 		return (NULL);
 	lines = split_lines(file_content);
 	free(file_content);
-	if (lines == NULL)
-		ft_putstr_fd(MALLOC_ERROR, STDERR_FILENO);
 	return (lines);
 }
