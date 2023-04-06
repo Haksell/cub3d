@@ -16,8 +16,8 @@
 
 # include <stdio.h> // TODO remove
 
-# define WINDOW_WIDTH 1280
-# define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 640
+# define WINDOW_HEIGHT 360
 
 # define BUFFER_SIZE_3D 16384
 
@@ -140,24 +140,13 @@ typedef struct s_dda {
 	t_texture	texture;
 }	t_dda;
 
-typedef struct s_mov {
-	bool	forward;
-	bool	backward;
-	bool	right;
-	bool	left;
-	bool	turn_l;
-	bool	turn_r;
-}	t_mov;
-
 typedef struct s_data {
-	int			frame;
 	t_mlx		mlx;
 	t_map		map;
 	t_vec2		camera;
 	t_infos		infos;
 	t_player	player;
 	t_textures	textures;
-	t_mov		mov;
 }	t_data;
 
 /******************************************************************************/
@@ -183,9 +172,6 @@ int			render_frame(t_data *data);
 /*                                                                            */
 /******************************************************************************/
 
-
-void		handle_movement(int keycode, t_data *data);
-void		handle_rotation(int keycode, t_data *data);
 int			handle_key_press(int keycode, t_data *data);
 bool		init_minilibx(t_data *data, char *window_title);
 

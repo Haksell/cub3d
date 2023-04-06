@@ -102,8 +102,6 @@ int	render_frame(t_data *data)
 		draw_column(data, &dda, x);
 		++x;
 	}
-	++data->frame;
-	printf("%d\n", data->frame);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 	return (EXIT_SUCCESS);
 }
