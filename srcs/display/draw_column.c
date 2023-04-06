@@ -7,12 +7,9 @@ static void	pixel_put(t_mlx *mlx, int x, int y, int color)
 
 static int	get_color(int y, int draw_start, int draw_end, t_data *data, double *tex_pos, t_dda *dda, double step)
 {
-	int	pixel_index;
-	int	tex_y;
-	int	color;
-	int	red;
-	int	green;
-	int	blue;
+	unsigned char	*pixel_addr;
+	int				tex_y;
+	int				color;
 
 	if (y < draw_start)
 		return (data->infos.ceil);
@@ -20,11 +17,10 @@ static int	get_color(int y, int draw_start, int draw_end, t_data *data, double *
 		return (data->infos.floor);
 	tex_y = clamp((int)*tex_pos, 0, dda->texture.height - 1);
 	*tex_pos += step;
-	pixel_index = tex_y * dda->texture.size_line + dda->tex_x * dda->texture.bytes_per_pixel;
-	red = dda->texture.addr[pixel_index + 2];
-	green = dda->texture.addr[pixel_index + 1];
-	blue = dda->texture.addr[pixel_index + 0];
-	color = red << 16 | green << 8 | blue;
+	pixel_addr = dda->texture.addr
+		+ tex_y * dda->texture.size_line
+		+ dda->tex_x * dda->texture.bytes_per_pixel;
+	color = pixel_addr[2] << 16 | pixel_addr[1] << 8 | pixel_addr[0];
 	if (dda->is_vertical)
 		color = (color & 0xfefefe) >> 1;
 	return (color);
