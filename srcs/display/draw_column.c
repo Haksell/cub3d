@@ -5,7 +5,7 @@ static void	pixel_put(t_mlx *mlx, int x, int y, int color)
 	mlx->addr[mlx->line_length * y + mlx->bytes_per_pixel * x] = color;
 }
 
-static int	get_color(int y, int draw_start, int draw_end, t_data *data, double *tex_pos, t_dda *dda, double step)
+static int	get_color(t_data *data, t_dda *dda, int y, int draw_start, int draw_end, double *tex_pos, double step)
 {
 	unsigned char	*pixel_addr;
 	int				tex_y;
@@ -46,7 +46,7 @@ void	draw_column(t_data *data, t_dda *dda, int x)
 	y = 0;
 	while (y < WINDOW_HEIGHT)
 	{
-		color = get_color(y, draw_start, draw_end, data, &tex_pos, dda, step);
+		color = get_color(data, dda, y, draw_start, draw_end, &tex_pos, step);
 		pixel_put(&data->mlx, x, y, color);
 		++y;
 	}
