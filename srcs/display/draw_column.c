@@ -16,6 +16,7 @@ static int	get_color(int y, int draw_start, int draw_end, t_data *data, double *
 	if (y > draw_end)
 		return (data->infos.floor);
 	tex_y = clamp((int)*tex_pos, 0, dda->texture.height - 1);
+	*tex_pos += step;
 	pixel_addr = dda->texture.addr
 		+ tex_y * dda->texture.size_line
 		+ dda->tex_x * dda->texture.bytes_per_pixel;
@@ -47,7 +48,6 @@ void	draw_column(t_data *data, t_dda *dda, int x)
 	{
 		color = get_color(y, draw_start, draw_end, data, &tex_pos, dda, step);
 		pixel_put(&data->mlx, x, y, color);
-		tex_pos += step;
 		++y;
 	}
 }
