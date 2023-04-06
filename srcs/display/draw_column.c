@@ -17,16 +17,24 @@ static void	set_draw_limits(t_column *column, double half_line_height)
 		column->draw_end = WINDOW_HEIGHT - 1;
 }
 
-static int	get_color(t_data *data, t_dda *dda, int y, int draw_start, int draw_end, double *tex_pos, double step)
+static void	draw_unicolor(t_mlx *mlx, int x, int start, int end, int color)
+{
+	int	y;
+
+	y = start;
+	while (y <= end)
+	{
+		pixel_put(mlx, x, y, color);
+		++y;
+	}
+}
+
+static int	get_color(t_dda *dda, double *tex_pos, double step)
 {
 	unsigned char	*pixel_addr;
 	int				tex_y;
 	int				color;
 
-	if (y < draw_start)
-		return (data->infos.ceil);
-	if (y > draw_end)
-		return (data->infos.floor);
 	tex_y = clamp((int)*tex_pos, 0, dda->texture.height - 1);
 	*tex_pos += step;
 	pixel_addr = dda->texture.addr
@@ -49,11 +57,13 @@ void	draw_column(t_data *data, t_dda *dda, int x)
 	set_draw_limits(&column, dda->half_line_height);
 	step = (double)dda->texture.height / dda->line_height;
 	tex_pos = (column.draw_start - WINDOW_HEIGHT / 2 + dda->half_line_height) * step;
-	y = 0;
-	while (y < WINDOW_HEIGHT)
+	draw_unicolor(&data->mlx, x, 0, column.draw_start - 1, data->infos.ceil);
+	y = column.draw_start;
+	while (y <= column.draw_end)
 	{
-		color = get_color(data, dda, y, column.draw_start, column.draw_end, &tex_pos, step);
+		color = get_color(dda, &tex_pos, step);
 		pixel_put(&data->mlx, x, y, color);
 		++y;
 	}
+	draw_unicolor(&data->mlx, x, column.draw_end + 1, WINDOW_HEIGHT - 1, data->infos.floor);
 }

@@ -117,7 +117,6 @@ typedef struct s_column {
 	int	draw_end;
 }	t_column;
 
-
 typedef struct s_dda {
 	int			map_x;
 	int			map_y;
