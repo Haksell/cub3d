@@ -19,16 +19,16 @@ static void	draw_unicolor(t_mlx *mlx, int x, int color, t_interval interval)
 
 static int	get_color(t_dda *dda, double *tex_pos, double step)
 {
-	unsigned char	*pixel_addr;
+	unsigned int	*pixel_addr;
 	int				tex_y;
 	int				color;
 
 	tex_y = clamp((int)*tex_pos, 0, dda->texture.height - 1);
 	*tex_pos += step;
-	pixel_addr = dda->texture.addr
-		+ tex_y * dda->texture.size_line
-		+ dda->tex_x * dda->texture.bytes_per_pixel;
-	color = pixel_addr[2] << 16 | pixel_addr[1] << 8 | pixel_addr[0];
+	pixel_addr = (unsigned int *)(dda->texture.addr
+			+ tex_y * dda->texture.size_line
+			+ dda->tex_x * dda->texture.bytes_per_pixel);
+	color = pixel_addr[0];
 	if (dda->is_vertical)
 		color = (color & 0xfefefe) >> 1;
 	return (color);
