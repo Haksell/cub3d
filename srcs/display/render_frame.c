@@ -5,7 +5,7 @@ static void	pixel_put(t_mlx *mlx, int x, int y, int color)
 	mlx->addr[mlx->line_length * y + mlx->bytes_per_pixel * x] = color;
 }
 
-static void	draw_vertical_line(t_data *data, int x, int tex_x, int line_height, bool is_vertical, t_texture texture)
+static void	draw_column(t_data *data, int x, int tex_x, int line_height, bool is_vertical, t_texture texture)
 {
 	double	step;
 	double	tex_pos;
@@ -51,102 +51,100 @@ static void	draw_vertical_line(t_data *data, int x, int tex_x, int line_height, 
 	}
 }
 
-int	render_frame(t_data *data)
+static void	render_column(t_data *data, int x)
 {
+	t_dda		dda;
 	t_texture	texture;
 	double		camera_x;
 	double		wall_x;
-	double		ray_dir_x;
-	double		ray_dir_y;
-	double		side_dist_x;
-	double		side_dist_y;
-	double		delta_dist_x;
-	double		delta_dist_y;
 	double		perp_wall_dist;
 	bool		is_vertical;
 	int			tex_x;
 	int			line_height;
-	int			map_x;
-	int			map_y;
-	int			step_x;
-	int			step_y;
-	int			x;
+
+	camera_x = -(2 * x / ((double)WINDOW_WIDTH - 1) - 1);
+	dda.ray_dir.x = data->player.dir.x + data->camera.x * camera_x;
+	dda.ray_dir.y = data->player.dir.y + data->camera.y * camera_x;
+	dda.map_x = (int)data->player.pos.x;
+	dda.map_y = (int)data->player.pos.y;
+	dda.delta_dist.x = fabs(1.0 / dda.ray_dir.x);
+	dda.delta_dist.y = fabs(1.0 / dda.ray_dir.y);
+	if (dda.ray_dir.x < 0)
+	{
+		dda.step.x = -1;
+		dda.side_dist.x = (data->player.pos.x - dda.map_x) * dda.delta_dist.x;
+	}
+	else
+	{
+		dda.step.x = 1;
+		dda.side_dist.x = (dda.map_x + 1 - data->player.pos.x) * dda.delta_dist.x;
+	}
+	if (dda.ray_dir.y < 0)
+	{
+		dda.step.y = -1;
+		dda.side_dist.y = (data->player.pos.y - dda.map_y) * dda.delta_dist.y;
+	}
+	else
+	{
+		dda.step.y = 1;
+		dda.side_dist.y = (dda.map_y + 1 - data->player.pos.y) * dda.delta_dist.y;
+	}
+	while (true)
+	{
+		if (dda.side_dist.x < dda.side_dist.y)
+		{
+			dda.side_dist.x += dda.delta_dist.x;
+			dda.map_x += dda.step.x;
+			is_vertical = false;
+		}
+		else
+		{
+			dda.side_dist.y += dda.delta_dist.y;
+			dda.map_y += dda.step.y;
+			is_vertical = true;
+		}
+		if (dda.map_x < 0 || dda.map_x >= data->map.width
+			|| dda.map_y < 0 || dda.map_y >= data->map.height
+			|| data->map.grid[(int)dda.map_y][(int)dda.map_x] == '1')
+			break ;
+	}
+	if (is_vertical)
+		perp_wall_dist = dda.side_dist.y - dda.delta_dist.y;
+	else
+		perp_wall_dist = dda.side_dist.x - dda.delta_dist.x;
+	line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
+	if (is_vertical)
+		wall_x = data->player.pos.x + perp_wall_dist * dda.ray_dir.x;
+	else
+		wall_x = data->player.pos.y + perp_wall_dist * dda.ray_dir.y;
+	if (is_vertical)
+	{
+		texture = data->textures.north;
+		if (dda.ray_dir.y < 0)
+			texture = data->textures.south;
+	}
+	else
+	{
+		texture = data->textures.east;
+		if (dda.ray_dir.x > 0)
+			texture = data->textures.west;
+	}
+	wall_x -= floor(wall_x);
+	tex_x = (int)(wall_x * texture.width);
+	if ((is_vertical && dda.ray_dir.y < 0) || (!is_vertical && dda.ray_dir.x > 0))
+		tex_x = texture.width - tex_x - 1;
+	draw_column(data, x, tex_x, line_height, is_vertical, texture);
+	++x;
+}
+
+int	render_frame(t_data *data)
+{
+	int	x;
 
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
-		camera_x = -(2 * x / ((double)WINDOW_WIDTH - 1) - 1);
-		ray_dir_x = data->player.dir.x + data->camera.x * camera_x;
-		ray_dir_y = data->player.dir.y + data->camera.y * camera_x;
-		map_x = (int)data->player.pos.x;
-		map_y = (int)data->player.pos.y;
-		delta_dist_x = fabs(1.0 / ray_dir_x);
-		delta_dist_y = fabs(1.0 / ray_dir_y);
-		if (ray_dir_x < 0)
-		{
-			step_x = -1;
-			side_dist_x = (data->player.pos.x - map_x) * delta_dist_x;
-		}
-		else
-		{
-			step_x = 1;
-			side_dist_x = (map_x + 1 - data->player.pos.x) * delta_dist_x;
-		}
-		if (ray_dir_y < 0)
-		{
-			step_y = -1;
-			side_dist_y = (data->player.pos.y - map_y) * delta_dist_y;
-		}
-		else
-		{
-			step_y = 1;
-			side_dist_y = (map_y + 1 - data->player.pos.y) * delta_dist_y;
-		}
-		while (true)
-		{
-			if (side_dist_x < side_dist_y)
-			{
-				side_dist_x += delta_dist_x;
-				map_x += step_x;
-				is_vertical = false;
-			}
-			else
-			{
-				side_dist_y += delta_dist_y;
-				map_y += step_y;
-				is_vertical = true;
-			}
-			if (map_x < 0 || map_x >= data->map.width
-				|| map_y < 0 || map_y >= data->map.height
-				|| data->map.grid[map_y][map_x] == '1')
-				break ;
-		}
-		if (is_vertical)
-			perp_wall_dist = side_dist_y - delta_dist_y;
-		else
-			perp_wall_dist = side_dist_x - delta_dist_x;
-		line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
-		if (is_vertical)
-			wall_x = data->player.pos.x + perp_wall_dist * ray_dir_x;
-		else
-			wall_x = data->player.pos.y + perp_wall_dist * ray_dir_y;
-		if (is_vertical)
-		{
-			texture = data->textures.north;
-			if (ray_dir_y < 0)
-				texture = data->textures.south;
-		}
-		else
-		{
-			texture = data->textures.east;
-			if (ray_dir_x > 0)
-				texture = data->textures.west;
-		}
-		wall_x -= floor(wall_x);
-		tex_x = (int)(wall_x * texture.width);
-		if ((is_vertical && ray_dir_y < 0) || (!is_vertical && ray_dir_x > 0))
-			tex_x = texture.width - tex_x - 1;
-		draw_vertical_line(data, x, tex_x, line_height, is_vertical, texture);
+		render_column(data, x);
 		++x;
 	}
 	++data->frame;

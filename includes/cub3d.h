@@ -112,6 +112,15 @@ typedef struct s_player {
 	t_vec2	dir;
 }	t_player;
 
+typedef struct s_dda {
+	t_vec2		ray_dir;
+	t_vec2		side_dist;
+	t_vec2		delta_dist;
+	t_vec2		step;
+	int			map_x;
+	int			map_y;
+}	t_dda;
+
 typedef struct s_data {
 	int			frame;
 	t_mlx		mlx;
