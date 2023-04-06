@@ -5,6 +5,20 @@ static void	pixel_put(t_mlx *mlx, int x, int y, int color)
 	mlx->addr[mlx->line_length * y + mlx->bytes_per_pixel * x] = color;
 }
 
+static t_interval	get_sprite_interval(t_dda *dda)
+{
+	static double	middle_height = (WINDOW_HEIGHT - 1) / 2;
+	t_interval		interval;
+
+	interval.start = middle_height - dda->half_line_height;
+	if (interval.start < 0)
+		interval.start = 0;
+	interval.end = middle_height + dda->half_line_height;
+	if (interval.end > WINDOW_HEIGHT - 1)
+		interval.end = WINDOW_HEIGHT - 1;
+	return (interval);
+}
+
 static void	draw_unicolor(t_mlx *mlx, int x, int color, t_interval interval)
 {
 	int	y;
@@ -45,18 +59,11 @@ static void	draw_sprite(t_data *data, t_dda *dda, int x, t_interval interval)
 
 void	draw_column(t_data *data, t_dda *dda, int x)
 {
-	static double	middle_height = (WINDOW_HEIGHT - 1) / 2;
-	t_interval		interval;
+	const t_interval	sprite_interval = get_sprite_interval(dda);
 
-	interval.start = middle_height - dda->half_line_height;
-	if (interval.start < 0)
-		interval.start = 0;
-	interval.end = middle_height + dda->half_line_height;
-	if (interval.end > WINDOW_HEIGHT - 1)
-		interval.end = WINDOW_HEIGHT - 1;
-	draw_unicolor(&data->mlx, x, data->infos.ceil,
-		(t_interval){0, interval.start - 1});
-	draw_sprite(data, dda, x, interval);
-	draw_unicolor(&data->mlx, x, data->infos.floor,
-		(t_interval){interval.end + 1, WINDOW_HEIGHT - 1});
+	draw_unicolor(&data->mlx, x, data->infos.ceil, (t_interval){
+		0, sprite_interval.start - 1});
+	draw_sprite(data, dda, x, sprite_interval);
+	draw_unicolor(&data->mlx, x, data->infos.floor, (t_interval){
+		sprite_interval.end + 1, WINDOW_HEIGHT - 1});
 }
