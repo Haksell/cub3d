@@ -88,7 +88,7 @@ static void	terminate_dda(t_data *data, t_dda *dda)
 		dda->tex_x = dda->texture.width - dda->tex_x - 1;
 }
 
-void	check_if_mov(t_data *data)
+void	move(t_data *data)
 {
 	if (data->mov.forward)
 		handle_movement(XK_W, data);
@@ -110,7 +110,7 @@ int	render_frame(t_data *data)
 	int		x;
 
 	x = 0;
-	check_if_mov(data);
+	move(data);
 	while (x < WINDOW_WIDTH)
 	{
 		init_dda(data, &dda, x);

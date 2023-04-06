@@ -59,7 +59,7 @@
 # define NON_WALL_CHARACTERS "0NESW"
 
 # define CAMERA_FOV 0.66
-# define SPEED 0.38
+# define SPEED 0.15
 // # define TURN 0.1308996938995747
 # define TURN 0.05
 

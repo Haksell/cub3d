@@ -56,9 +56,7 @@ int	handle_key_press(int keycode, t_data *data)
 
 int	handle_key_release(int keycode, t_data *data)
 {
-	if (keycode == XK_Escape)
-		close_window(data);
-	else if (keycode == XK_W || keycode == XK_w)
+	if (keycode == XK_W || keycode == XK_w)
 		data->mov.forward = false;
 	else if (keycode == XK_D || keycode == XK_d)
 		data->mov.right = false;
