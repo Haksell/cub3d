@@ -99,7 +99,7 @@ int	render_frame(t_data *data)
 		init_dda(data, &dda, x);
 		execute_dda(data, &dda);
 		terminate_dda(data, &dda);
-		draw_column(data, x, &dda);
+		draw_column(data, &dda, x);
 		++x;
 	}
 	++data->frame;

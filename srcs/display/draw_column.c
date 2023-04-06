@@ -5,7 +5,7 @@ static void	pixel_put(t_mlx *mlx, int x, int y, int color)
 	mlx->addr[mlx->line_length * y + mlx->bytes_per_pixel * x] = color;
 }
 
-void	draw_column(t_data *data, int x, t_dda *dda)
+void	draw_column(t_data *data, t_dda *dda, int x)
 {
 	double	step;
 	double	tex_pos;

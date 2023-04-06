@@ -153,7 +153,7 @@ void		display_map(t_map *map); // TODO remove
 /*                                                                            */
 /******************************************************************************/
 
-void		draw_column(t_data *data, int x, t_dda *dda);
+void		draw_column(t_data *data, t_dda *dda, int x);
 int			render_frame(t_data *data);
 
 /******************************************************************************/
