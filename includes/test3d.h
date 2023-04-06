@@ -14,7 +14,8 @@
 
 # define VALID_DIRECTORY "maps/valid/"
 # define INVALID_DIRECTORY "maps/invalid/"
-# define UNREADABLE_MAP "maps/invalid/unreadable.cub"
+# define MAP_NOT_FOUND "maps/invalid/notfound.cub"
+# define MAP_UNREADABLE "maps/invalid/unreadable.cub"
 
 void	display_title(char *s);
 void	ft_assert(char *test_name, bool result);

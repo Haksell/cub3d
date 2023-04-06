@@ -11,6 +11,7 @@ MLX := ${PATH_MLX}/libmlx.a
 GARBAGE := .vscode
 INCLUDES := -I./${PATH_INCLUDES} -I./${PATH_LIBFT}/includes -I./${PATH_MLX}
 CC := cc -Wall -Wextra -Werror -O3 -g3
+VALGRIND := valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes -q
 YEET := 1>/dev/null 2>/dev/null
 MLX_REPO := git@github.com:42Paris/minilibx-linux.git
 LIBRARIES := -L${PATH_LIBFT} -lft -L${PATH_MLX} -lmlx -lXext -lX11 -lm
@@ -84,7 +85,7 @@ norm:
 	./scripts/niih ${PATH_LIBFT} ${PATH_INCLUDES} ${PATH_SRCS} ${PATH_TESTS}
 
 test: ${TEST}
-	@./${TEST}
+	@${VALGRIND} ./${TEST}
 
 norm_test: norm test
 

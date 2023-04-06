@@ -22,29 +22,31 @@ static t_list	*ls(char *path)
 
 static void	test(char *title, char *directory, bool expected)
 {
-	bool	result;
 	bool	is_unreadable;
 	char	*filename;
 	t_data	data;
+	t_list	*to_free;
 	t_list	*filenames;
 
 	display_title(title);
 	filenames = ls(directory);
 	if (!expected)
-		ft_lstadd_front(&filenames, ft_lstnew("maps/invalid/notfound.cub"));
+		ft_lstadd_front(&filenames, ft_lstnew(ft_strdup(MAP_NOT_FOUND)));
+	to_free = filenames;
 	while (filenames != NULL)
 	{
 		init_data(&data);
 		filename = filenames->content;
-		is_unreadable = ft_strcmp(filename, UNREADABLE_MAP) == 0;
+		is_unreadable = ft_strcmp(filename, MAP_UNREADABLE) == 0;
 		if (is_unreadable)
-			chmod(UNREADABLE_MAP, 0000);
-		result = parse_file(&data, 2, (char *[]){"", filename, NULL});
+			chmod(MAP_UNREADABLE, 0000);
+		ft_assert(filename, parse_file(&data, 2, (char *[]){"", filename, NULL}) == expected);
 		if (is_unreadable)
-			chmod(UNREADABLE_MAP, 0644);
-		ft_assert(filename, result == expected);
+			chmod(MAP_UNREADABLE, 0644);
 		filenames = filenames->next;
 	}
+	ft_lstclear(&to_free, (void (*)(void *))ft_free);
+	free_data(&data);
 }
 
 void	test_parse_file(void)
