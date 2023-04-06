@@ -44,7 +44,7 @@ bool	parse_infos(t_infos *infos, char ***lines)
 {
 	char	**line;
 
-	while (**lines != NULL)
+	while (true)
 	{
 		line = ft_split(**lines, ' ');
 		if (line == NULL)
@@ -55,6 +55,7 @@ bool	parse_infos(t_infos *infos, char ***lines)
 		ft_free_double((void ***)&line);
 		if (complete_infos(infos))
 			return (true);
+		if (**lines == NULL)
+			return (complain_bool(ERROR_INCOMPLETE_INFORMATIONS));
 	}
-	return (complete_infos(infos));
 }

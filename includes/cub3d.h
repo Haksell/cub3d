@@ -43,6 +43,8 @@
 # define ERROR_INCOMPLETE_WALL "Wall is incomplete"
 # define ERROR_PARSING_LINE "Failed to parse line"
 # define ERROR_INVALID_IDENTIFIER "Invalid identifier"
+# define ERROR_MAP_TOO_SMALL "Map is too small"
+# define ERROR_INCOMPLETE_INFORMATIONS "Some textures or colors are missing"
 
 # define ID_NORTH "NO"
 # define ID_SOUTH "SO"

@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	get_map_dimensions(t_map *map, char **lines)
+static bool	get_map_dimensions(t_map *map, char **lines)
 {
 	int	length;
 
@@ -12,6 +12,7 @@ static void	get_map_dimensions(t_map *map, char **lines)
 			map->width = length;
 		++map->height;
 	}
+	return (map->width >= 3 && map->height >= 3);
 }
 
 static bool	init_map(t_map *map, char **lines)
@@ -19,7 +20,8 @@ static bool	init_map(t_map *map, char **lines)
 	int	i;
 	int	j;
 
-	get_map_dimensions(map, lines);
+	if (!get_map_dimensions(map, lines))
+		return (complain_bool(ERROR_MAP_TOO_SMALL));
 	map->grid = ft_calloc(map->height + 1, sizeof(char *));
 	if (map->grid == NULL)
 		return (complain_bool(ERROR_MALLOC));
