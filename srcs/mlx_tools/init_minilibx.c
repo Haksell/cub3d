@@ -8,9 +8,10 @@ static bool	load_texture(void *mlx, char *path, t_texture *texture)
 			&texture->width, &texture->height);
 	if (texture->img == NULL)
 		return (complain_bool(ERROR_TEXTURES));
-	texture->addr = (unsigned char *)mlx_get_data_addr(texture->img,
+	texture->addr = (unsigned int *)mlx_get_data_addr(texture->img,
 			&texture->bytes_per_pixel, &texture->size_line, &_);
-	texture->bytes_per_pixel >>= 3;
+	texture->size_line >>= 2;
+	texture->bytes_per_pixel >>= 5;
 	if (texture->addr == NULL)
 		return (complain_bool(ERROR_TEXTURES));
 	return (true);

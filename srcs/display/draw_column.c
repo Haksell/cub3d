@@ -17,28 +17,13 @@ static void	draw_unicolor(t_mlx *mlx, int x, int color, t_interval interval)
 	}
 }
 
-static int	get_color(t_dda *dda, double *tex_pos, double step)
-{
-	unsigned int	*pixel_addr;
-	int				tex_y;
-	int				color;
-
-	tex_y = clamp((int)*tex_pos, 0, dda->texture.height - 1);
-	*tex_pos += step;
-	pixel_addr = (unsigned int *)(dda->texture.addr
-			+ tex_y * dda->texture.size_line
-			+ dda->tex_x * dda->texture.bytes_per_pixel);
-	color = pixel_addr[0];
-	if (dda->is_vertical)
-		color = (color & 0xfefefe) >> 1;
-	return (color);
-}
-
 static void	draw_sprite(t_data *data, t_dda *dda, int x, t_interval interval)
 {
 	double	step;
 	double	tex_pos;
 	int		y;
+	int		tex_y;
+	int		color;
 
 	step = (double)dda->texture.height / dda->line_height;
 	tex_pos = interval.start - WINDOW_HEIGHT / 2 + dda->half_line_height;
@@ -46,7 +31,14 @@ static void	draw_sprite(t_data *data, t_dda *dda, int x, t_interval interval)
 	y = interval.start;
 	while (y <= interval.end)
 	{
-		pixel_put(&data->mlx, x, y, get_color(dda, &tex_pos, step));
+		tex_y = clamp((int)tex_pos, 0, dda->texture.height - 1);
+		color = *(dda->texture.addr
+				+ tex_y * dda->texture.size_line
+				+ dda->tex_x * dda->texture.bytes_per_pixel);
+		if (dda->is_vertical)
+			color = (color & 0xfefefe) >> 1;
+		pixel_put(&data->mlx, x, y, color);
+		tex_pos += step;
 		++y;
 	}
 }

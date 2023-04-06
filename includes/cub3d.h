@@ -97,7 +97,7 @@ typedef struct s_texture {
 	int				bytes_per_pixel;
 	int				size_line;
 	void			*img;
-	unsigned char	*addr;
+	unsigned int	*addr;
 }	t_texture;
 
 typedef struct s_textures {
