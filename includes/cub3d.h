@@ -154,10 +154,12 @@ bool		init_minilibx(t_data *data, char *window_title);
 /******************************************************************************/
 
 char		**get_lines(char *filename);
+bool		is_map_walled(t_map *map);
 bool		parse_color(char *s, int *color);
 bool		parse_file(t_data *data, int argc, char **argv);
 bool		parse_infos(t_infos *infos, char ***lines);
 bool		parse_map(t_data *data, char **lines);
+bool		valid_characters(t_data *data);
 
 /******************************************************************************/
 /*                                                                            */
