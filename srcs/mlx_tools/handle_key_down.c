@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	handle_movement(int keycode, t_data *data)
+void	handle_movement(int keycode, t_data *data)
 {
 	const t_vec2	scaled_dir = vec2_scale(data->player.dir, SPEED);
 	t_vec2			rotated_dir;
@@ -20,7 +20,7 @@ static void	handle_movement(int keycode, t_data *data)
 		data->player.pos = new_pos;
 }
 
-static void	handle_rotation(int keycode, t_data *data)
+void	handle_rotation(int keycode, t_data *data)
 {
 	double	turn;
 

@@ -60,7 +60,8 @@
 
 # define CAMERA_FOV 0.66
 # define SPEED 0.38
-# define TURN 0.1308996938995747
+// # define TURN 0.1308996938995747
+# define TURN 0.05
 
 /******************************************************************************/
 /*                                                                            */
@@ -187,6 +188,7 @@ int			render_frame(t_data *data);
 void		handle_movement(int keycode, t_data *data);
 void		handle_rotation(int keycode, t_data *data);
 int			handle_key_press(int keycode, t_data *data);
+int			handle_key_release(int keycode, t_data *data);
 bool		init_minilibx(t_data *data, char *window_title);
 
 /******************************************************************************/
