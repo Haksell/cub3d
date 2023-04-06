@@ -112,6 +112,12 @@ typedef struct s_player {
 	t_vec2	dir;
 }	t_player;
 
+typedef struct s_column {
+	int	draw_start;
+	int	draw_end;
+}	t_column;
+
+
 typedef struct s_dda {
 	int			map_x;
 	int			map_y;
