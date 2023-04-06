@@ -22,31 +22,31 @@ static t_list	*ls(char *path)
 
 static void	test(char *title, char *directory, bool expected)
 {
-	bool	is_unreadable;
+	bool	result;
 	char	*filename;
 	t_data	data;
-	t_list	*to_free;
 	t_list	*filenames;
+	t_list	*curr;
 
 	display_title(title);
 	filenames = ls(directory);
 	if (!expected)
 		ft_lstadd_front(&filenames, ft_lstnew(ft_strdup(MAP_NOT_FOUND)));
-	to_free = filenames;
-	while (filenames != NULL)
+	curr = filenames;
+	while (curr != NULL)
 	{
 		init_data(&data);
-		filename = filenames->content;
-		is_unreadable = ft_strcmp(filename, MAP_UNREADABLE) == 0;
-		if (is_unreadable)
+		filename = curr->content;
+		if (ft_strcmp(filename, MAP_UNREADABLE) == 0)
 			chmod(MAP_UNREADABLE, 0000);
-		ft_assert(filename, parse_file(&data, 2, (char *[]){"", filename, NULL}) == expected);
-		if (is_unreadable)
+		result = parse_file(&data, 2, (char *[]){"", filename, NULL});
+		ft_assert(filename, result == expected);
+		if (ft_strcmp(filename, MAP_UNREADABLE) == 0)
 			chmod(MAP_UNREADABLE, 0644);
-		filenames = filenames->next;
+		curr = curr->next;
+		free_data(&data);
 	}
-	ft_lstclear(&to_free, (void (*)(void *))ft_free);
-	free_data(&data);
+	ft_lstclear(&filenames, (void (*)(void *))ft_free);
 }
 
 void	test_parse_file(void)

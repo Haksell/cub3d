@@ -87,8 +87,6 @@ norm:
 test: ${TEST}
 	@${VALGRIND} ./${TEST}
 
-norm_test: norm test
+.PHONY: all clean fclean norm re test
 
-.PHONY: all clean fclean norm norm_test re test
-
-.SILENT: norm norm_test test ${MLX} ${PATH_MLX}
+.SILENT: norm test ${MLX} ${PATH_MLX}

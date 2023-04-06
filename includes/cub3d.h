@@ -142,7 +142,6 @@ typedef struct s_dda {
 
 typedef struct s_data {
 	int			frame;
-	char		**lines;
 	t_mlx		mlx;
 	t_map		map;
 	t_vec2		camera;
