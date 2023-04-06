@@ -50,7 +50,7 @@ bool	parse_infos(t_infos *infos, char ***lines)
 		if (line == NULL)
 			return (complain_bool(ERROR_MALLOC));
 		if (!parse_info(infos, line))
-			return (false);
+			return (ft_free_double((void ***)&line), false);
 		++(*lines);
 		ft_free_double((void ***)&line);
 		if (complete_infos(infos))

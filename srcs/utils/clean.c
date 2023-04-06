@@ -6,6 +6,15 @@ static void	free_image(void *mlx, void *img)
 		mlx_destroy_image(mlx, img);
 }
 
+void	free_lines(char **lines)
+{
+	if (lines != NULL)
+	{
+		free(lines[0]);
+		free(lines);
+	}
+}
+
 void	free_data(t_data *data)
 {
 	if (data->mlx.mlx != NULL)

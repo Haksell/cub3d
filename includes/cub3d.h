@@ -142,6 +142,7 @@ typedef struct s_dda {
 
 typedef struct s_data {
 	int			frame;
+	char		**lines;
 	t_mlx		mlx;
 	t_map		map;
 	t_vec2		camera;
@@ -203,6 +204,7 @@ bool		complain_bool(char *error_message);
 int			complain_int(char *error_message);
 void		*complain_ptr(char *error_message);
 void		free_data(t_data *data);
+void		free_lines(char **lines);
 void		init_data(t_data *data);
 
 /******************************************************************************/

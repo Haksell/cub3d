@@ -26,10 +26,10 @@ bool	parse_file(t_data *data, int argc, char **argv)
 		return (false);
 	lines_to_free = lines;
 	if (!parse_infos(&data->infos, &lines))
-		return (false);
+		return (free_lines(lines_to_free), false);
 	while (*lines != NULL && is_all_space(*lines))
 		++lines;
 	if (!parse_map(data, lines))
-		return (free(lines_to_free[0]), free(lines_to_free), false);
-	return (free(lines_to_free[0]), free(lines_to_free), true);
+		return (free_lines(lines_to_free), false);
+	return (free_lines(lines_to_free), true);
 }
