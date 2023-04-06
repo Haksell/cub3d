@@ -21,7 +21,7 @@ vpath %.c ${PATH_SRCS}
 SRCS += debug # TODO remove
 
 vpath %.c ${PATH_SRCS}/display
-SRCS += render_frame
+SRCS += draw_column render_frame
 
 vpath %.c ${PATH_SRCS}/mlx_tools
 SRCS += handle_key_down init_minilibx

@@ -113,12 +113,20 @@ typedef struct s_player {
 }	t_player;
 
 typedef struct s_dda {
+	int			map_x;
+	int			map_y;
+	int			tex_x;
+	int			step_x;
+	int			step_y;
+	int			line_height;
+	int			half_line_height;
+	bool		is_vertical;
+	double		camera_x;
+	double		wall_x;
 	t_vec2		ray_dir;
 	t_vec2		side_dist;
 	t_vec2		delta_dist;
-	t_vec2		step;
-	int			map_x;
-	int			map_y;
+	t_texture	texture;
 }	t_dda;
 
 typedef struct s_data {
@@ -145,6 +153,7 @@ void		display_map(t_map *map); // TODO remove
 /*                                                                            */
 /******************************************************************************/
 
+void		draw_column(t_data *data, int x, t_dda *dda);
 int			render_frame(t_data *data);
 
 /******************************************************************************/
