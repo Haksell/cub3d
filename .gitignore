@@ -1,7 +1,5 @@
 mlx
 libft
 objs
-objs_bonus
-cub3d
-cub3d_bonus
-test3d
+cub3D
+test3D

@@ -1,5 +1,5 @@
-NAME := cub3d
-TEST := test3d
+NAME := cub3D
+TEST := test3D
 PATH_INCLUDES := includes
 PATH_SRCS := srcs
 PATH_OBJS := objs

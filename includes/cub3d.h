@@ -16,8 +16,8 @@
 
 # include <stdio.h> // TODO remove
 
-# define WINDOW_WIDTH 640
-# define WINDOW_HEIGHT 360
+# define WINDOW_WIDTH 128
+# define WINDOW_HEIGHT 72
 
 # define BUFFER_SIZE_3D 16384
 

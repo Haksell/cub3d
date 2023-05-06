@@ -2,7 +2,8 @@
 
 static void	pixel_put(t_mlx *mlx, int x, int y, int color)
 {
-	mlx->addr[mlx->line_length * y + mlx->bytes_per_pixel * x] = color;
+	if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGHT)
+		mlx->addr[mlx->line_length * y + mlx->bytes_per_pixel * x] = color;
 }
 
 static t_interval	get_sprite_interval(t_dda *dda)
