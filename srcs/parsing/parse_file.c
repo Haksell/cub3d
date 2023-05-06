@@ -20,7 +20,7 @@ bool	parse_file(t_data *data, int argc, char **argv)
 	char	**lines_to_free;
 
 	if (argc != 2 || !ft_endswith(argv[1], ".cub"))
-		return (complain_bool(USAGE_MANDATORY));
+		return (complain_bool(USAGE));
 	lines = get_lines(argv[1]);
 	if (lines == NULL)
 		return (false);

@@ -16,12 +16,12 @@
 
 # include <stdio.h> // TODO remove
 
-# define WINDOW_WIDTH 128
-# define WINDOW_HEIGHT 72
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
 
 # define BUFFER_SIZE_3D 16384
 
-# define USAGE_MANDATORY "Usage: ./cub3d *.cub"
+# define USAGE "Usage: ./cub3d *.cub"
 # define ERROR_OPEN "File cannot be opened"
 # define ERROR_MALLOC "Impossible to allocate heap memory"
 # define ERROR_READ "Error while reading the file"
