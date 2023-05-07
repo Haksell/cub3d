@@ -42,6 +42,7 @@
 # define ERROR_PARSING_LINE "Failed to parse line"
 # define ERROR_INVALID_IDENTIFIER "Invalid identifier"
 # define ERROR_MAP_TOO_SMALL "Map is too small"
+# define ERROR_EMPTY_LINE_IN_MAP "Empty line found in map"
 # define ERROR_INCOMPLETE_INFORMATIONS "Some textures or colors are missing"
 
 # define ID_NORTH "NO"
@@ -152,16 +153,6 @@ typedef struct s_data {
 
 /******************************************************************************/
 /*                                                                            */
-/*                                  DISPLAY                                   */
-/*                                                                            */
-/******************************************************************************/
-
-void		draw_column(t_data *data, t_dda *dda, int x);
-int			render_frame(t_data *data);
-void		update_player(t_data *data);
-
-/******************************************************************************/
-/*                                                                            */
 /*                                 MLX_TOOLS                                  */
 /*                                                                            */
 /******************************************************************************/
@@ -186,6 +177,16 @@ bool		valid_characters(t_data *data);
 
 /******************************************************************************/
 /*                                                                            */
+/*                                RENDER_FRAME                                */
+/*                                                                            */
+/******************************************************************************/
+
+void		draw_column(t_data *data, t_dda *dda, int x);
+int			render_frame(t_data *data);
+void		update_player(t_data *data);
+
+/******************************************************************************/
+/*                                                                            */
 /*                                   UTILS                                    */
 /*                                                                            */
 /******************************************************************************/
@@ -199,19 +200,8 @@ void		*complain_ptr(char *error_message);
 void		free_data(t_data *data);
 void		free_lines(char **lines);
 void		init_data(t_data *data);
-
-/******************************************************************************/
-/*                                                                            */
-/*                                    vec2                                    */
-/*                                                                            */
-/******************************************************************************/
-
 t_vec2		vec2_add(t_vec2 v1, t_vec2 v2);
-double		vec2_dot(t_vec2 v1, t_vec2 v2);
-t_vec2		vec2_mul(t_vec2 v1, t_vec2 v2);
-t_vec2		vec2_negate(t_vec2 v);
 t_vec2		vec2_rotate(t_vec2 v, double angle);
 t_vec2		vec2_scale(t_vec2 v, double t);
-t_vec2		vec2_sub(t_vec2 v1, t_vec2 v2);
 
 #endif

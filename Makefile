@@ -19,9 +19,6 @@ GREEN := "\033[1;32m"
 RESET := "\033[0;0m"
 HEADERS := cub3d
 
-vpath %.c ${PATH_SRCS}/display
-SRCS += draw_column render_frame update_player
-
 vpath %.c ${PATH_SRCS}/mlx_tools
 SRCS += handle_key_down init_minilibx
 
@@ -29,11 +26,11 @@ vpath %.c ${PATH_SRCS}/parsing
 SRCS += parse_color parse_file parse_infos parse_map
 SRCS += get_lines is_map_walled valid_characters
 
-vpath %.c ${PATH_SRCS}/utils
-SRCS += arrays clean complain init_data math
+vpath %.c ${PATH_SRCS}/render_frame
+SRCS += draw_column render_frame update_player
 
-vpath %.c ${PATH_SRCS}/vec2
-SRCS += vec2a vec2b
+vpath %.c ${PATH_SRCS}/utils
+SRCS += arrays clean complain init_data math vec2
 
 ifeq (test, ${findstring test, ${MAKECMDGOALS}})
 	HEADERS += test3d

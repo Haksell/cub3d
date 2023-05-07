@@ -9,12 +9,14 @@ static bool	get_map_dimensions(t_map *map, char **lines)
 	{
 		length = ft_strlen(lines[map->height]);
 		if (length == 0)
-			return (false);
+			return (complain_bool(ERROR_EMPTY_LINE_IN_MAP));
 		if (length > map->width)
 			map->width = length;
 		++map->height;
 	}
-	return (map->width >= 3 && map->height >= 3);
+	if (map->width < 3 || map->height < 3)
+		return (complain_bool(ERROR_MAP_TOO_SMALL));
+	return (true);
 }
 
 static bool	init_map(t_map *map, char **lines)
@@ -23,7 +25,7 @@ static bool	init_map(t_map *map, char **lines)
 	int	j;
 
 	if (!get_map_dimensions(map, lines))
-		return (complain_bool(ERROR_MAP_TOO_SMALL));
+		return (false);
 	map->grid = ft_calloc(map->height + 1, sizeof(char *));
 	if (map->grid == NULL)
 		return (complain_bool(ERROR_MALLOC));
