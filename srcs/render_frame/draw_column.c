@@ -6,7 +6,7 @@ static void	pixel_put(t_mlx *mlx, int x, int y, int color)
 		mlx->addr[mlx->line_length * y + mlx->bytes_per_pixel * x] = color;
 }
 
-static t_interval	clamp_interval(t_interval interval)
+t_interval	clamp_interval(t_interval interval)
 {
 	if (interval.start < 0)
 		interval.start = 0;

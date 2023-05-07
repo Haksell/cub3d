@@ -153,6 +153,25 @@ typedef struct s_data {
 
 /******************************************************************************/
 /*                                                                            */
+/*                                    MISC                                    */
+/*                                                                            */
+/******************************************************************************/
+
+int			arrlen(char **lines);
+int			clamp(int n, int min, int max);
+int			close_window(t_data *data);
+bool		complain_bool(char *error_message);
+int			complain_int(char *error_message);
+void		*complain_ptr(char *error_message);
+void		free_data(t_data *data);
+void		free_lines(char **lines);
+void		init_data(t_data *data);
+t_vec2		vec2_add(t_vec2 v1, t_vec2 v2);
+t_vec2		vec2_rotate(t_vec2 v, double angle);
+t_vec2		vec2_scale(t_vec2 v, double t);
+
+/******************************************************************************/
+/*                                                                            */
 /*                                 MLX_TOOLS                                  */
 /*                                                                            */
 /******************************************************************************/
@@ -184,24 +203,5 @@ bool		valid_characters(t_data *data);
 void		draw_column(t_data *data, t_dda *dda, int x);
 int			render_frame(t_data *data);
 void		update_player(t_data *data);
-
-/******************************************************************************/
-/*                                                                            */
-/*                                   UTILS                                    */
-/*                                                                            */
-/******************************************************************************/
-
-int			arrlen(char **lines);
-int			clamp(int n, int min, int max);
-int			close_window(t_data *data);
-bool		complain_bool(char *error_message);
-int			complain_int(char *error_message);
-void		*complain_ptr(char *error_message);
-void		free_data(t_data *data);
-void		free_lines(char **lines);
-void		init_data(t_data *data);
-t_vec2		vec2_add(t_vec2 v1, t_vec2 v2);
-t_vec2		vec2_rotate(t_vec2 v, double angle);
-t_vec2		vec2_scale(t_vec2 v, double t);
 
 #endif
