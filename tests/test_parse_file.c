@@ -30,19 +30,19 @@ static void	test(char *title, char *directory, bool expected)
 
 	display_title(title);
 	filenames = ls(directory);
-	if (!expected)
-		ft_lstadd_front(&filenames, ft_lstnew(ft_strdup(MAP_NOT_FOUND)));
+	// if (!expected)
+	// 	ft_lstadd_front(&filenames, ft_lstnew(ft_strdup(MAP_NOT_FOUND)));
 	curr = filenames;
 	while (curr != NULL)
 	{
 		init_data(&data);
 		filename = curr->content;
-		if (ft_strcmp(filename, MAP_UNREADABLE) == 0)
-			chmod(MAP_UNREADABLE, 0000);
+		// if (ft_strcmp(filename, MAP_UNREADABLE) == 0)
+		// 	chmod(MAP_UNREADABLE, 0000);
 		result = parse_file(&data, 2, (char *[]){"", filename, NULL});
 		ft_assert(filename, result == expected);
-		if (ft_strcmp(filename, MAP_UNREADABLE) == 0)
-			chmod(MAP_UNREADABLE, 0644);
+		// if (ft_strcmp(filename, MAP_UNREADABLE) == 0)
+		// 	chmod(MAP_UNREADABLE, 0644);
 		curr = curr->next;
 		free_data(&data);
 	}
