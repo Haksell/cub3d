@@ -59,8 +59,8 @@
 # define NON_WALL_CHARACTERS "0NESW"
 
 # define CAMERA_FOV 0.66
-# define SPEED 0.38
-# define TURN 0.1308996938995747
+# define SPEED 0.025
+# define TURN 0.010471975511965976
 
 /******************************************************************************/
 /*                                                                            */
@@ -114,6 +114,9 @@ typedef struct s_textures {
 }	t_textures;
 
 typedef struct s_player {
+	int		forward;
+	int		right;
+	int		clockwise;
 	t_vec2	pos;
 	t_vec2	dir;
 }	t_player;
@@ -165,6 +168,7 @@ void		display_map(t_map *map); // TODO remove
 
 void		draw_column(t_data *data, t_dda *dda, int x);
 int			render_frame(t_data *data);
+void		update_player(t_data *data);
 
 /******************************************************************************/
 /*                                                                            */
@@ -173,6 +177,7 @@ int			render_frame(t_data *data);
 /******************************************************************************/
 
 int			handle_key_press(int keycode, t_data *data);
+int			handle_key_release(int keycode, t_data *data);
 bool		init_minilibx(t_data *data, char *window_title);
 
 /******************************************************************************/

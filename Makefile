@@ -22,7 +22,7 @@ vpath %.c ${PATH_SRCS}
 SRCS += debug # TODO remove
 
 vpath %.c ${PATH_SRCS}/display
-SRCS += draw_column render_frame
+SRCS += draw_column render_frame update_player
 
 vpath %.c ${PATH_SRCS}/mlx_tools
 SRCS += handle_key_down init_minilibx

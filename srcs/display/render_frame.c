@@ -93,6 +93,7 @@ int	render_frame(t_data *data)
 	t_dda	dda;
 	int		x;
 
+	update_player(data);
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{

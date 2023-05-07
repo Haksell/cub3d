@@ -12,6 +12,8 @@ double	vec2_length(t_vec2 v)
 
 t_vec2	vec2_unit(t_vec2 v)
 {
+	if (v.x == 0 && v.y == 0)
+		return (v);
 	return (vec2_div(v, vec2_length(v)));
 }
 
