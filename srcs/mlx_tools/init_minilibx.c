@@ -6,7 +6,7 @@ static bool	load_texture(void *mlx, char *path, t_texture *texture)
 
 	texture->img = mlx_xpm_file_to_image(mlx, path,
 			&texture->width, &texture->height);
-	if (texture->img == NULL)
+	if (texture->img == NULL || texture->width <= 0 || texture->width <= 0)
 		return (complain_bool(ERROR_TEXTURES));
 	texture->addr = (unsigned int *)mlx_get_data_addr(texture->img,
 			&texture->bytes_per_pixel, &texture->size_line, &_);
