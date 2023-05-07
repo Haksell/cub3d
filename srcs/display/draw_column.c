@@ -40,6 +40,8 @@ static void	draw_sprite(t_data *data, t_dda *dda, int x, t_interval interval)
 	int		tex_y;
 	int		color;
 
+	if (dda->line_height == 0)
+		return ;
 	step = (double)dda->texture.height / dda->line_height;
 	tex_pos = interval.start - WINDOW_HEIGHT / 2 + dda->half_line_height;
 	tex_pos *= step;
