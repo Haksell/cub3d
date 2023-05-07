@@ -8,6 +8,8 @@ static bool	get_map_dimensions(t_map *map, char **lines)
 	while (lines[map->height] != NULL)
 	{
 		length = ft_strlen(lines[map->height]);
+		if (length == 0)
+			return (false);
 		if (length > map->width)
 			map->width = length;
 		++map->height;
