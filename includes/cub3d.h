@@ -14,8 +14,6 @@
 # include <X11/keysym.h>
 # include <X11/Xlib.h>
 
-# include <stdio.h> // TODO remove
-
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720
 
@@ -154,14 +152,6 @@ typedef struct s_data {
 
 /******************************************************************************/
 /*                                                                            */
-/*                                   DEBUG                                    */
-/*                                                                            */
-/******************************************************************************/
-
-void		display_map(t_map *map); // TODO remove
-
-/******************************************************************************/
-/*                                                                            */
 /*                                  DISPLAY                                   */
 /*                                                                            */
 /******************************************************************************/
@@ -217,17 +207,11 @@ void		init_data(t_data *data);
 /******************************************************************************/
 
 t_vec2		vec2_add(t_vec2 v1, t_vec2 v2);
-double		vec2_dist(t_vec2 v1, t_vec2 v2);
-double		vec2_dist_squared(t_vec2 v1, t_vec2 v2);
-t_vec2		vec2_div(t_vec2 v, double t);
 double		vec2_dot(t_vec2 v1, t_vec2 v2);
-double		vec2_length(t_vec2 v);
-double		vec2_length_squared(t_vec2 v);
 t_vec2		vec2_mul(t_vec2 v1, t_vec2 v2);
 t_vec2		vec2_negate(t_vec2 v);
 t_vec2		vec2_rotate(t_vec2 v, double angle);
 t_vec2		vec2_scale(t_vec2 v, double t);
 t_vec2		vec2_sub(t_vec2 v1, t_vec2 v2);
-t_vec2		vec2_unit(t_vec2 v);
 
 #endif

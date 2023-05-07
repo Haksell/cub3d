@@ -17,9 +17,7 @@ MLX_REPO := git@github.com:42Paris/minilibx-linux.git
 LIBRARIES := -L${PATH_LIBFT} -lft -L${PATH_MLX} -lmlx -lXext -lX11 -lm
 GREEN := "\033[1;32m"
 RESET := "\033[0;0m"
-
-vpath %.c ${PATH_SRCS}
-SRCS += debug # TODO remove
+HEADERS := cub3d
 
 vpath %.c ${PATH_SRCS}/display
 SRCS += draw_column render_frame update_player
@@ -35,17 +33,16 @@ vpath %.c ${PATH_SRCS}/utils
 SRCS += arrays clean complain init_data math
 
 vpath %.c ${PATH_SRCS}/vec2
-SRCS += vec2a vec2b vec2c
+SRCS += vec2a vec2b
 
 ifeq (test, ${findstring test, ${MAKECMDGOALS}})
-	HEADERS := test3d
+	HEADERS += test3d
 	vpath %.c ${PATH_TESTS}
 	SRCS += test3d test_parse_file
 else
-	HEADERS := cub3d
+	vpath %.c ${PATH_SRCS}
 	SRCS += main
 endif
-
 
 SRCS := ${addsuffix .c, ${SRCS}}
 OBJS := ${patsubst %.c, ${PATH_OBJS}/%.o, ${SRCS}}

@@ -19,10 +19,3 @@ t_vec2	vec2_scale(t_vec2 v, double t)
 {
 	return ((t_vec2){v.x * t, v.y * t});
 }
-
-t_vec2	vec2_div(t_vec2 v, double t)
-{
-	const double	u = 1 / t;
-
-	return ((t_vec2){v.x * u, v.y * u});
-}
